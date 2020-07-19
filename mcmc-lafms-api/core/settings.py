@@ -50,13 +50,12 @@ INSTALLED_APPS = [
     'simple_history',
 
     # 'assets',
-    # 'operations',
     'organisations',
     'users',
-    'api_basic',
-    'notifications',
-    'receipts',
     'documents',
+    'receipts',
+    'notifications',
+    'api_basic'
     # 'zones'
 ]
 

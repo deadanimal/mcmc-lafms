@@ -1,17 +1,17 @@
+from api_basic.views import (
+    ApiBasicViewSet
+)
+from organisations.views import (
+    OrganisationViewSet
+)
 from documents.views import (
     DocumentsViewSet
-)
-from receipts.views import (
-    ReceiptsViewSet
 )
 from notifications.views import (
     NotificationsViewSet
 )
-# from api_basic.views import (
-#     ApiBasicViewSet
-# )
-from organisations.views import (
-    OrganisationViewSet
+from receipts.views import (
+    ReceiptsViewSet
 )
 # Users app
 from users.views import (
@@ -44,29 +44,43 @@ class NestedDefaultRouter(NestedRouterMixin, routers.DefaultRouter):
 router = NestedDefaultRouter()
 
 # Organisations app
+
+
 organisations_router = router.register(
     'organisations', OrganisationViewSet
 )
 
 # api basic app
-# api_basic_router = router.register(
-#     'api-basic', ApiBasicViewSet
-# )
 
-# api basic app
-notifications_router = router.register(
-    'notifications', NotificationsViewSet
+
+api_basic_router = router.register(
+    'api-basic', ApiBasicViewSet
 )
-# api basic app
+
+# documents app
+
+
 documents_router = router.register(
     'documents', DocumentsViewSet
 )
-# api basic app
+
+# notifications app
+
+
+notifications_router = router.register(
+    'notifications', NotificationsViewSet
+)
+
+# receipt app
+
+
 receipts_router = router.register(
     'receipts', ReceiptsViewSet
 )
 
 # Users app
+
+
 users_router = router.register(
     'users', CustomUserViewSet
 )

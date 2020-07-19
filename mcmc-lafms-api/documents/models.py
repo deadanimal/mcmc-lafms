@@ -16,6 +16,7 @@ class Documents(models.Model):
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=255, blank=True)
+    nric = models.CharField(max_length=12, default='NA')
     # STATUS = [
     #     ('CO', 'Company'),
     #     ('PA', 'Partnership')
@@ -32,9 +33,9 @@ class Documents(models.Model):
     general_description = models.CharField(max_length=255, blank=True)
     email = models.CharField(max_length=255, blank=True)
     signature = models.CharField(max_length=255, blank=True)
-    # office_number = PhoneNumberField(null=True, blank=True)
-    # fax = PhoneNumberField(null=True, blank=True)
-    # mobile_number = PhoneNumberField(null=True,blank=True)
+    office_number = PhoneNumberField(null=True, blank=True)
+    fax = PhoneNumberField(null=True, blank=True)
+    mobile_number = PhoneNumberField(null=True,blank=True)
     # APPSTATUS = [
     #     ('CO', 'Company'),
     #     ('PA', 'Partnership')
@@ -50,7 +51,6 @@ class Documents(models.Model):
 
     # office_number = PhoneNumberField(null=True,blank=True)
     # birth_date = models.DateTimeField(null=True, blank=True)
-    # nric = models.CharField(max_length=12, default='NA')
 
     created_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now=True)

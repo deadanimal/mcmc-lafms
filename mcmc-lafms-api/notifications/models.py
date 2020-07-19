@@ -15,7 +15,7 @@ class Notifications(models.Model):
     name = models.CharField(max_length=100, default='NA')
 
     created_date = models.DateTimeField(auto_now_add=True)
-    modified_date = models.DateTimeField(auto_now=True)
+    # modified_date = models.DateTimeField(auto_now=True)
 
     class meta:
         ordering = ['name']

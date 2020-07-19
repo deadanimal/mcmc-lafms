@@ -12,15 +12,8 @@ from .models import (
     Notifications
 )
 
-
 class NotificationsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Notifications
         fields = '__all__'
-
-        # fields = (
-        #     'id',
-        #     'name',
-        #     'is_active'
-        # )
