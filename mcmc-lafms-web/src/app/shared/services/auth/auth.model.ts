@@ -8,7 +8,7 @@ export class User {
   public email: string;
   public gender: string;
   public occupation: string;
-  // public user_type: string
+  public user_type: string;
   public nric_picture: string;
   public profile_picture: string;
   public username: string;
@@ -25,7 +25,7 @@ export class User {
     email: string,
     gender: string,
     occupation: string,
-    // user_type: string,
+    user_type: string,
     nric_picture: string,
     profile_picture: string,
     username: string,
@@ -41,7 +41,7 @@ export class User {
     this.email = email;
     this.gender = gender;
     this.occupation = occupation;
-    // this.user_type = user_type
+    this.user_type = user_type;
     this.nric_picture = nric_picture;
     this.profile_picture = profile_picture;
     this.username = username;

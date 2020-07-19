@@ -59,8 +59,6 @@ export class LoginComponent implements OnInit {
     this.loadingBar.start();
     console.log(this.loginForm.value.username);
 
-    this.successMessage();
-    // this.navigatePage("dashboard-admin");
     if (this.loginForm.value.username == "admin") {
       this.navigatePage("dashboard-admin");
     } else if (this.loginForm.value.username == "user") {
@@ -70,19 +68,16 @@ export class LoginComponent implements OnInit {
     } else if (this.loginForm.value.username == "rmd") {
       this.navigatePage("dashboard-rmd");
     }
-    // console.log(this.loginForm.value);
+
+    this.successMessage();
+    // this.navigatePage("dashboard-admin");
+    console.log("page = " + this.loginForm.value);
     // this.authService.obtainToken(this.loginForm.value).subscribe(
     //   (res) => {
+    //     console.log("res = " + res);
     //     this.loadingBar.complete();
-    //     this.successMessage();
-    //     // this.navigatePage("dashboard-admin");
-    //     // if (this.loginForm.value.username == "admin") {
-    //     //   // this.authService.userRole = 1;
-    //     //   this.navigatePage("dashboard-admin");
-    //     // } else if (this.loginForm.value.username == "user") {
-    //     //   // this.authService.userRole = 2;
-    //     //   this.navigatePage("dashboard-user");
-    //     // }
+
+    //     // this.successMessage();
     //   },
     //   (err) => {
     //     this.loadingBar.complete();

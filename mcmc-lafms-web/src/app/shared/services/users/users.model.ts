@@ -7,6 +7,7 @@ export class User {
   public birth_date: string;
   public nric: string;
   public username: string;
+  public user_type: string;
   public is_active: string;
 
   constructor(
@@ -17,7 +18,8 @@ export class User {
     home_number: string,
     office_number: string,
     birth_date: string,
-    nric: string
+    nric: string,
+    user_type: string
   ) {
     this.mobile_number = mobile_number;
     this.name = name;
@@ -27,5 +29,6 @@ export class User {
     this.office_number = office_number;
     this.birth_date = birth_date;
     this.nric = nric;
+    this.user_type = user_type;
   }
 }

@@ -69,7 +69,7 @@
               <div class="row">
                 <div class="col">
                   <h5 class="card-title text-uppercase text-muted mb-0">
-                     New Applied License
+                    New Applied License
                   </h5>
                   <span class="h2 font-weight-bold mb-0"> 2,356 </span>
                 </div>
@@ -137,7 +137,7 @@
           </div>
         </div>
 
-        <div style="width: 100%; height: 450px;" id="chartdivComplaint"></div>
+        <div style="width: 100%; height: 450px;" id="chartdivLicense"></div>
       </div>
     </div>
     <div class="col">
@@ -188,7 +188,7 @@
             [footerHeight]="50"
             [rowHeight]="'auto'"
             [limit]="tableEntries != -1 ? tableEntries : undefined"
-            [rows]="listComplaint"
+            [rows]="tableRows"
             (activate)="onActivate($event)"
           >
             <ngx-datatable-column name="Index">
@@ -314,63 +314,18 @@
   </div>
 
   <div class="modal-body">
-    <form [formGroup]="editComplaintForm">
-      <!-- <div class="row">
-        <div class="col-md-6">
-          <div class="form-group">
-            <label class="form-control-label">Name</label>
-            <input
-              class="form-control"
-              placeholder="Enter Name"
-              formControlName="name"
-              type="text"
-            />
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="form-group">
-            <label class="form-control-label">Complaint Category</label>
-            <select
-              class="form-control"
-              placeholder="Enter Type"
-              formControlName="complaint_category"
-              type="text"
-            >
-              <option value="VB">Verbal</option>
-              <option value="TX">Text</option>
-              <option value="NA">Not Available</option>
-            </select>
-          </div>
-        </div>
-      </div> 
+    <form [formGroup]="editLicenseForm">
+      <div class="form-group">
+        <label class="form-control-label">email</label>
+        <input
+          class="form-control"
+          placeholder="Enter Email"
+          formControlName="email"
+          type="text"
+        />
+      </div>
 
-      <div class="row">
-        <div class="col-md-6">
-          <div class="form-group">
-            <label class="form-control-label">email</label>
-            <input
-              class="form-control"
-              placeholder="Enter Email"
-              formControlName="email"
-              type="text"
-            />
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="form-group">
-            <label class="form-control-label">Phone</label>
-            <input
-              class="form-control"
-              placeholder="Enter Phone"
-              formControlName="phone"
-              type="text"
-            />
-          </div>
-        </div>
-      </div> -->
-
-      <div class="row">
-        <div class="col-md-12">
+      <!-- <div class="col-md-12">
           <div class="form-group">
             <label class="form-control-label">Complaint To</label>
             <select
@@ -401,20 +356,7 @@
               <option value="CM">Completed</option>
             </select>
           </div>
-        </div>
-
-        <div class="col-md-12">
-          <div class="form-group">
-            <label class="form-control-label">Tiket Name</label>
-            <input
-              class="form-control"
-              placeholder="Enter Ticket Name"
-              formControlName="ticket_name"
-              type="text"
-            />
-          </div>
-        </div>
-      </div>
+        </div> -->
 
       <input name="id" formControlName="id" type="hidden" />
     </form>
@@ -425,7 +367,7 @@
       <button
         class="btn btn-default"
         type="submit"
-        (click)="editComplaintDetail()"
+        (click)="editLicenseDetail()"
       >
         Save
       </button>

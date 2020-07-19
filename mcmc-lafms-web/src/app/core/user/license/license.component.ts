@@ -5,8 +5,8 @@ import {
   NgZone,
   TemplateRef,
 } from "@angular/core";
-import { Ticket } from "src/app/shared/services/tickets/tickets.model";
-import { TicketsService } from "src/app/shared/services/tickets/tickets.service";
+import { License } from "src/app/shared/services/license/license.model";
+import { LicenseService } from "src/app/shared/services/license/license.service";
 // import { AuditData } from 'src/assets/mock/admin-Audit/Audit.data.json'
 import * as moment from "moment";
 import * as am4core from "@amcharts/amcharts4/core";
@@ -50,7 +50,7 @@ export class LicenseComponent implements OnInit, OnDestroy {
   tableSelected: any[] = [];
   tableTemp = [];
   tableActiveRow: any;
-  tableRows: Ticket[] = [];
+  tableRows: License[] = [];
   SelectionType = SelectionType;
 
   // Chart
@@ -70,7 +70,7 @@ export class LicenseComponent implements OnInit, OnDestroy {
 
   // Data
   public datas: any = [];
-  listComplaint: any;
+  listLicense: any;
 
   // Modal
   modal: BsModalRef;
@@ -82,10 +82,11 @@ export class LicenseComponent implements OnInit, OnDestroy {
   // Form
   searchForm: FormGroup;
   searchField: FormGroup;
-  addNewComplaintForm: FormGroup;
-  editTicketForm: FormGroup;
+  addNewLicenseForm: FormGroup;
+  editLicenseForm: FormGroup;
+  addLicenseForm: FormGroup;
   editAuditFormMessages = {
-    Complaintname: [
+    Licensename: [
       // { type: "required", message: "Email is required" },
       { type: "required", message: "A valid email is required" },
     ],
@@ -101,7 +102,7 @@ export class LicenseComponent implements OnInit, OnDestroy {
     private modalService: BsModalService,
     private formBuilder: FormBuilder,
     private http: HttpClient,
-    private TicketData: TicketsService,
+    private LicenseData: LicenseService,
     private loadingBar: LoadingBarService,
     private router: Router,
     private _route: ActivatedRoute
@@ -109,61 +110,65 @@ export class LicenseComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     // this.getCharts();
-    this.TicketData.getAll().subscribe((res) => {
-      this.listComplaint = res;
+    this.LicenseData.getAll().subscribe((res) => {
+      this.listLicense = res;
       this.tableRows = [...res];
 
       console.log(this.tableRows);
-      this.listComplaint = this.tableRows.map((prop, key) => {
+      this.listLicense = this.tableRows.map((prop, key) => {
         // console.log("test =>", prop, key);
         return {
           ...prop,
           // id: key,
         };
       });
-      // console.log("Svc: ", this.listComplaint);
+      // console.log("Svc: ", this.listLicense);
     });
 
-    this.addNewComplaintForm = this.formBuilder.group({
-      name: new FormControl("", Validators.compose([Validators.required])),
-      email: new FormControl("", Validators.compose([Validators.required])),
-      phone: new FormControl("", Validators.compose([Validators.required])),
-      complaint: new FormControl("", Validators.compose([Validators.required])),
-      complaint_category: new FormControl(
-        "",
-        Validators.compose([Validators.required])
-      ),
-      supporting_docs: new FormControl(),
-      status: new FormControl(""),
-    });
-
-    this.editTicketForm = this.formBuilder.group({
+    this.editLicenseForm = this.formBuilder.group({
       id: new FormControl(""),
-      name: new FormControl("", Validators.compose([Validators.required])),
-      email: new FormControl("", Validators.compose([Validators.required])),
-      phone: new FormControl("", Validators.compose([Validators.required])),
-      complaint: new FormControl("", Validators.compose([Validators.required])),
-      complaint_category: new FormControl(
-        "",
-        Validators.compose([Validators.required])
-      ),
-      supporting_docs: new FormControl(),
-      status: new FormControl(""),
+      name: new FormControl(""),
+      email: new FormControl(""),
+      nric: new FormControl(""),
+      address: new FormControl(""),
+      general_description: new FormControl(""),
+      signature: new FormControl(""),
+      office_number: new FormControl(""),
+      fax: new FormControl(""),
+      mobile_number: new FormControl(""),
+      created_date: new FormControl(""),
+      modified_date: new FormControl(""),
+    });
+
+    this.addLicenseForm = this.formBuilder.group({
+      id: new FormControl(""),
+      name: new FormControl(""),
+      email: new FormControl(""),
+      nric: new FormControl(""),
+      address: new FormControl(""),
+      general_description: new FormControl(""),
+      signature: new FormControl(""),
+      office_number: new FormControl(""),
+      fax: new FormControl(""),
+      mobile_number: new FormControl(""),
+      created_date: new FormControl(""),
+      modified_date: new FormControl(""),
     });
   }
 
-  addNewComplaint() {
+  addNewLicense() {
     // console.log("qqqq");
-    // this.loadingBar.start();
-    // this.loadingBar.complete();
+    this.loadingBar.start();
     // this.successMessage();
-    console.log(this.addNewComplaintForm.value);
-    this.TicketData.create(this.addNewComplaintForm.value).subscribe(
+    console.log(this.addNewLicenseForm.value);
+    this.LicenseData.create(this.addNewLicenseForm.value).subscribe(
       () => {
         // Success
         // this.isLoading = false
         // this.successMessage();
         this.successAlert("add new");
+        this.loadingBar.complete();
+        this.navigatePage('/user/license')
         // window.location.reload();
       },
       () => {
@@ -179,15 +184,15 @@ export class LicenseComponent implements OnInit, OnDestroy {
     );
   }
 
-  editTicketDetail() {
+  editLicenseDetail() {
     // console.log("qqqq");
     // this.loadingBar.start();
     // this.loadingBar.complete();
     // this.successEditMessage();
-    console.log("ticket = ", this.editTicketForm.value);
-    this.TicketData.update(
-      this.editTicketForm.value.id,
-      this.editTicketForm.value
+    console.log("License = ", this.editLicenseForm.value);
+    this.LicenseData.update(
+      this.editLicenseForm.value.id,
+      this.editLicenseForm.value
     ).subscribe(
       () => {
         // Success
@@ -210,19 +215,14 @@ export class LicenseComponent implements OnInit, OnDestroy {
     );
   }
 
-  navigatePage(path: String, id) {
-    // let qq = "db17a36a-1da6-4919-9746-dfed8802ec9d";
-    console.log(id);
-    console.log(path + "/" + id);
-    if (path == "/admin//utility/Complaint") {
+  navigatePage(path: String) {
+    if (path == "/user/license") {
       return this.router.navigate([path]);
-    } else if (path == "/admin//utility/Complaint-detail") {
-      return this.router.navigate([path, id]);
     }
   }
 
-  getComplaint(id: string): Ticket[] {
-    return this.listComplaint.find((e) => e.id === id);
+  getLicense(id: string): License[] {
+    return this.listLicense.find((e) => e.id === id);
   }
 
   successMessage() {
@@ -240,7 +240,7 @@ export class LicenseComponent implements OnInit, OnDestroy {
   errorAlert(task) {
     swal.fire({
       title: "Error",
-      text: "Cannot " + task + " complaint, Please Try Again!",
+      text: "Cannot " + task + " License, Please Try Again!",
       type: "error",
       buttonsStyling: false,
       confirmButtonClass: "btn btn-danger",
@@ -266,16 +266,16 @@ export class LicenseComponent implements OnInit, OnDestroy {
   filterTable($event) {
     var returnData: any;
     let val = $event.target.value;
-    this.listComplaint = this.tableRows.filter(function (d) {
+    this.listLicense = this.tableRows.filter(function (d) {
       for (var key in d) {
         if (d[key].toLowerCase().indexOf(val) !== -1) {
           return true;
         }
         // console.log(key, d[key].toLowerCase().toLowerCase().indexOf(val));
 
-        // if (d.complaint_type.toLowerCase().indexOf(val) !== -1 || !val) {
+        // if (d.License_type.toLowerCase().indexOf(val) !== -1 || !val) {
         //   returnData =
-        //     d.complaint_type.toLowerCase().indexOf(val) !== -1 || !val;
+        //     d.License_type.toLowerCase().indexOf(val) !== -1 || !val;
         // }
         // return returnData;
       }
@@ -314,7 +314,7 @@ export class LicenseComponent implements OnInit, OnDestroy {
   openModal(modalRef: TemplateRef<any>, row) {
     if (row) {
       console.log(row);
-      this.editTicketForm.patchValue(row);
+      this.editLicenseForm.patchValue(row);
     }
     // this.modal = this.modalService.show(
     //   modalRef,
@@ -325,14 +325,14 @@ export class LicenseComponent implements OnInit, OnDestroy {
 
   closeModal() {
     this.modal.hide();
-    this.editTicketForm.reset();
+    this.editLicenseForm.reset();
   }
 
   confirm() {
     swal
       .fire({
         title: "Confirmation",
-        text: "Are you sure to create this new Complaint?",
+        text: "Are you sure to create this new License?",
         type: "info",
         buttonsStyling: false,
         confirmButtonClass: "btn btn-info",
@@ -352,7 +352,7 @@ export class LicenseComponent implements OnInit, OnDestroy {
     swal
       .fire({
         title: "Success",
-        text: "A new Complaint has been created!",
+        text: "A new License has been created!",
         type: "success",
         buttonsStyling: false,
         confirmButtonClass: "btn btn-success",
@@ -361,15 +361,15 @@ export class LicenseComponent implements OnInit, OnDestroy {
       .then((result) => {
         if (result.value) {
           this.modal.hide();
-          this.editTicketForm.reset();
+          this.editLicenseForm.reset();
         }
       });
   }
 
   getChart() {
-    // let chart = am4core.create("chartdivComplaint", am4charts.XYChart);
-    // let chart = am4core.create("chartdivComplaint", am4charts.XYChart);
-    let chart = am4core.create("chartdivComplaint", am4charts.XYChart);
+    // let chart = am4core.create("chartdivLicense", am4charts.XYChart);
+    // let chart = am4core.create("chartdivLicense", am4charts.XYChart);
+    let chart = am4core.create("chartdivLicense", am4charts.XYChart);
 
     // Enable chart cursor
     chart.cursor = new am4charts.XYCursor();

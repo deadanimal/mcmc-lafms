@@ -45,7 +45,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   getCharts() {
     this.zone.runOutsideAngular(() => {
       this.getChart();
-      // this.getChart1();
+      this.getChart1();
       this.getChart2();
       this.getChartpie2();
     });
@@ -59,63 +59,63 @@ export class DashboardComponent implements OnInit, OnDestroy {
     chart.data = [
       {
         month: "Jan",
-        MSC: 1,
-        MyCC: 5,
+        Approved: 1,
+        Rejected: 5,
       },
       {
         month: "Feb",
-        MSC: 3,
-        MyCC: 2,
+        Approved: 3,
+        Rejected: 2,
       },
       {
         month: "Mar",
-        MSC: 5,
-        MyCC: 4,
+        Approved: 5,
+        Rejected: 4,
       },
       {
         month: "Apr",
-        MSC: 3,
-        MyCC: 3,
+        Approved: 3,
+        Rejected: 3,
       },
       {
         month: "May",
-        MSC: 6,
-        MyCC: 5,
+        Approved: 6,
+        Rejected: 5,
       },
       {
         month: "Jun",
-        MSC: 2,
-        MyCC: 4,
+        Approved: 2,
+        Rejected: 4,
       },
       {
         month: "Jul",
-        MSC: 4,
-        MyCC: 3,
+        Approved: 4,
+        Rejected: 3,
       },
       {
         month: "Aug",
-        MSC: 6,
-        MyCC: 5,
+        Approved: 6,
+        Rejected: 5,
       },
       {
         month: "Sep",
-        MSC: 5,
-        MyCC: 4,
+        Approved: 5,
+        Rejected: 4,
       },
       {
         month: "Oct",
-        MSC: 5,
-        MyCC: 5,
+        Approved: 5,
+        Rejected: 5,
       },
       {
         month: "Nov",
-        MSC: 4,
-        MyCC: 5,
+        Approved: 4,
+        Rejected: 5,
       },
       {
         month: "Dec",
-        MSC: 5,
-        MyCC: 6,
+        Approved: 5,
+        Rejected: 6,
       },
     ];
     // Create category axis
@@ -131,9 +131,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     // Create series
     let series1 = chart.series.push(new am4charts.LineSeries());
-    series1.dataFields.valueY = "MSC";
+    series1.dataFields.valueY = "Approved";
     series1.dataFields.categoryX = "month";
-    series1.name = "MSC Application";
+    series1.name = "Approved Application";
     series1.strokeWidth = 3;
     series1.bullets.push(new am4charts.CircleBullet());
     series1.tooltipText = "Amount {name} in {categoryX}: {valueY}";
@@ -141,9 +141,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
     series1.visible = false;
 
     let series2 = chart.series.push(new am4charts.LineSeries());
-    series2.dataFields.valueY = "MyCC";
+    series2.dataFields.valueY = "Rejected";
     series2.dataFields.categoryX = "month";
-    series2.name = "MyCC Application";
+    series2.name = "Rejected Application";
     series2.strokeWidth = 3;
     series2.bullets.push(new am4charts.CircleBullet());
     series2.tooltipText = "Amount {name} in {categoryX}: {valueY}";
@@ -157,51 +157,47 @@ export class DashboardComponent implements OnInit, OnDestroy {
     chart.legend = new am4charts.Legend();
   }
 
-  // getChart1() {
-  //   let chart = am4core.create("chartdivpie1", am4charts.PieChart);
-  //   chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
+  getChart1() {
+    let chart = am4core.create("chartdiv1", am4charts.PieChart);
+    chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
 
-  //   chart.data = [
-  //     {
-  //       item: "Lights",
-  //       value: 40,
-  //     },
-  //     {
-  //       item: "Fridge",
-  //       value: 30,
-  //     },
-  //     {
-  //       item: "TV",
-  //       value: 20,
-  //     },
-  //     {
-  //       item: "Washing Machine",
-  //       value: 16,
-  //     },
-  //   ];
-  //   chart.radius = am4core.percent(70);
-  //   chart.innerRadius = am4core.percent(40);
-  //   chart.startAngle = 180;
-  //   chart.endAngle = 360;
+    chart.data = [
+      {
+        item: "Approved",
+        value: 40,
+      },
+      {
+        item: "Rejected",
+        value: 30,
+      },
+      {
+        item: "Pending",
+        value: 20,
+      },
+    ];
+    chart.radius = am4core.percent(70);
+    chart.innerRadius = am4core.percent(40);
+    chart.startAngle = 180;
+    chart.endAngle = 360;
 
-  //   let series = chart.series.push(new am4charts.PieSeries());
-  //   series.dataFields.value = "value";
-  //   series.dataFields.category = "item";
-  //   series.ticks.template.disabled = true;
-  //   series.labels.template.disabled = true;
+    let series = chart.series.push(new am4charts.PieSeries());
+    series.dataFields.value = "value";
+    series.dataFields.category = "item";
+    series.ticks.template.disabled = true;
+    series.labels.template.disabled = true;
 
-  //   series.slices.template.cornerRadius = 10;
-  //   series.slices.template.innerCornerRadius = 7;
-  //   series.slices.template.draggable = true;
-  //   series.slices.template.inert = true;
-  //   series.alignLabels = false;
+    series.slices.template.cornerRadius = 10;
+    series.slices.template.innerCornerRadius = 7;
+    series.slices.template.draggable = true;
+    series.slices.template.inert = true;
+    series.alignLabels = false;
 
-  //   series.hiddenState.properties.startAngle = 90;
-  //   series.hiddenState.properties.endAngle = 90;
+    series.hiddenState.properties.startAngle = 90;
+    series.hiddenState.properties.endAngle = 90;
 
-  //   //chart.legend = new am4charts.Legend();
-  //   // this.chart1 = chart;
-  // }
+    //chart.legend = new am4charts.Legend();
+    // this.chart1 = chart;
+  }
 
   getChartpie2() {
     let chart = am4core.create("piechartdiv111", am4charts.PieChart);
@@ -252,11 +248,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     chart.data = [
       {
-        task: "MSC Application",
+        task: "Approved Application",
         value: 501.9,
       },
       {
-        task: "MyCC Application",
+        task: "Rejected Application",
         value: 304.8,
       },
     ];
