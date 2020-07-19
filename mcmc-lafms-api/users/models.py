@@ -15,6 +15,7 @@ class CustomUser(AbstractUser):
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=255, blank=True)
+    user_type = models.CharField(max_length=255, blank=True)
     profile_picture = models.ImageField(null=True, blank=True, upload_to=PathAndRename('images'))
 
     # home_number = PhoneNumberField(null=True,blank=True)

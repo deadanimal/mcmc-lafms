@@ -13,15 +13,18 @@ from .models import (
     CustomUser
 )
 
+
 class CustomUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CustomUser
         fields = (
-            'name', 
-            'profile_picture', 
-            # 'home_number', 
-            # 'office_number', 
+            'id',
+            'name',
+            'user_type',
+            'profile_picture',
+            # 'home_number',
+            # 'office_number',
             # 'mobile_number',
             # 'birth_date',
             # 'nric',
@@ -29,4 +32,3 @@ class CustomUserSerializer(serializers.ModelSerializer):
             'is_active'
         )
         read_only_fields = ('email', 'id')
-
