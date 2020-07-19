@@ -54,7 +54,9 @@ INSTALLED_APPS = [
     'users',
     'documents',
     'receipts',
+    'alert',
     'notifications',
+    'license',
     'api_basic'
     # 'zones'
 ]

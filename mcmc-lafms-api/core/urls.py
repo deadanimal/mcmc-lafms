@@ -4,14 +4,20 @@ from api_basic.views import (
 from organisations.views import (
     OrganisationViewSet
 )
-from documents.views import (
-    DocumentsViewSet
-)
-from notifications.views import (
-    NotificationsViewSet
-)
+# from documents.views import (
+#     DocumentsViewSet
+# )
+# from notifications.views import (
+#     NotificationsViewSet
+# )
 from receipts.views import (
     ReceiptsViewSet
+)
+from license.views import (
+    LicenseViewSet
+)
+from alert.views import (
+    AlertViewSet
 )
 # Users app
 from users.views import (
@@ -57,25 +63,39 @@ api_basic_router = router.register(
     'api-basic', ApiBasicViewSet
 )
 
-# documents app
+# # documents app
 
 
-documents_router = router.register(
-    'documents', DocumentsViewSet
-)
+# documents_router = router.register(
+#     'documents', DocumentsViewSet
+# )
 
-# notifications app
+# # notifications app
 
 
-notifications_router = router.register(
-    'notifications', NotificationsViewSet
-)
+# notifications_router = router.register(
+#     'notifications', NotificationsViewSet
+# )
 
 # receipt app
 
 
 receipts_router = router.register(
     'receipts', ReceiptsViewSet
+)
+
+# license app
+
+
+license_router = router.register(
+    'license', LicenseViewSet
+)
+
+# alert app
+
+
+alert_router = router.register(
+    'alert', AlertViewSet
 )
 
 # Users app

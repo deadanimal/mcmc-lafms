@@ -1,0 +1,676 @@
+<nav id="navbar-main">
+  <img width="100%" height="170px" [src]="imgLogo" />
+  <!-- <div class="centered">Centered</div> -->
+</nav>
+<div class="main-content">
+  <!-- Header -->
+  <div class="header bg-danger pt-5 pb-7">
+    <div class="container">
+      <!-- tab-->
+      <tabset type="pills" class="nav-fill flex-column flex-md-row mb-2 pb-2">
+        <tab>
+          <ng-template tabHeading>
+            <i class="ni ni-cloud-upload-96 mr-2"></i>Complaint
+          </ng-template>
+
+          <!-- complaint tab -->
+          <div class="card bg-secondary mt-2">
+            <div class="card-body">
+              <form [formGroup]="complaintForm">
+                <div formArrayName="form">
+                  <div class="form-group">
+                    <label class="form-control-label">User </label>
+                    <select
+                      class="form-control"
+                      placeholder="Enter Your Answer"
+                      formControlName="complainer_type"
+                      type="text"
+                    >
+                      <option value="ST">Staff</option>
+                      <option value="VS">Visitor</option>
+                      <option value="PT">Patient</option>
+                    </select>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="form-control-label">Location </label>
+                        <input
+                          class="form-control"
+                          placeholder="Enter Location"
+                          formControlName="location"
+                          type="text"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="form-control-label">Date </label>
+                        <input
+                          class="form-control"
+                          placeholder="Enter Your Answer"
+                          formControlName="date"
+                          type="datetime-local"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-control-label">Type</label>
+                    <select
+                      class="form-control"
+                      placeholder="Enter Your Answer"
+                      formControlName="complaint_class"
+                      type="text"
+                    >
+                      <option value="PP">People</option>
+                      <option value="PC">Process</option>
+                      <option value="FC">Facilities</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-control-label">Department </label>
+                    <select
+                      class="form-control"
+                      placeholder="Enter Your Answer"
+                      formControlName="complaint_department"
+                      type="text"
+                    >
+                      <option value="ST">Staff </option>
+                      <option value="SC">Security</option>
+                      <option value="CN">Cleaner</option>
+                      <option value="UT">Utkkkm</option>
+                      <option value="OT">Other</option>
+                      <option value="OP">Outlet operator</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-control-label"
+                      >Complaint Position
+                    </label>
+                    <select
+                      class="form-control"
+                      placeholder="Enter Your Answer"
+                      formControlName="complaint_position"
+                      type="text"
+                    >
+                      <option value="DR">Doctor</option>
+                      <option value="NS">Nurse</option>
+                      <option value="CT">Counter</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-control-label"
+                      >Complaint Behavior
+                    </label>
+                    <select
+                      class="form-control"
+                      placeholder="Enter Answer"
+                      formControlName="complaint_behaviour"
+                      type="text"
+                    >
+                      <option value="AP">Appearance</option>
+                      <option value="AT">Attitude</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-control-label">Free Text </label>
+                    <textarea
+                      class="form-control"
+                      placeholder="Free Type..."
+                      formControlName="free_text"
+                      type="text"
+                      rows="6"
+                    >
+                    </textarea>
+                  </div>
+
+                  <!-- <div
+                [formGroupName]="i"
+                *ngFor="
+                  let ind of surveyForm.get('form')?.controls;
+                  let i = index
+                "
+              > 
+              <div class="row">
+                <div class="col-md-12" *ngFor="let item of listSurveyQuestion">
+                  <div class="form-group">
+                    <label class="form-control-label"
+                      >{{ item.question }}
+                    </label>
+                    <input
+                      class="form-control"
+                      placeholder="Enter Your Answer"
+                      formControlName="answer"
+                      type="text"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div> -->
+                </div>
+              </form>
+            </div>
+            <div class="card-header bg-secondary text-center">
+              <button
+                class="btn btn-default"
+                type="submit"
+                (click)="addNewComplaintAnswer()"
+              >
+                Submit
+              </button>
+            </div>
+          </div>
+        </tab>
+        <tab>
+          <ng-template tabHeading>
+            <i class="ni ni-bell-55 mr-2"></i>Feedback
+          </ng-template>
+
+          <!-- tab for feedback -->
+          <div class="card bg-secondary mt-2">
+            <div class="card-body">
+              <form [formGroup]="feedbackForm">
+                <div class="form-group">
+                  <label class="form-control-label">Is patient </label>
+                  <select
+                    class="form-control"
+                    placeholder="Enter Your Answer"
+                    formControlName="is_patient"
+                    type="text"
+                  >
+                    <option value="">Please Select</option>
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-control-label">Name </label>
+                  <input
+                    class="form-control"
+                    placeholder="Enter Your Answer"
+                    formControlName="name"
+                    type="text"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label class="form-control-label">Medical Record No </label>
+                  <input
+                    class="form-control"
+                    placeholder="Enter Your Answer"
+                    formControlName="mrn"
+                    type="text"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label class="form-control-label">Phone </label>
+                  <input
+                    class="form-control"
+                    placeholder="Enter Your Answer"
+                    formControlName="phone"
+                    type="text"
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="form-control-label">Email </label>
+                  <input
+                    class="form-control"
+                    placeholder="Enter Your Email"
+                    formControlName="email"
+                    type="text"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label class="form-control-label">Patient Type </label>
+                  <select
+                    class="form-control"
+                    placeholder="Enter Your Answer"
+                    formControlName="patient_type"
+                    type="text"
+                  >
+                    <option value="">Please Choose</option>
+                    <option value="IN">Inpatient</option>
+                    <option value="OU">Outpatient</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-control-label">Feedback Type </label>
+                  <select
+                    class="form-control"
+                    placeholder="Enter Your Answer"
+                    formControlName="feedback_type"
+                    type="text"
+                  >
+                    <option value="01">How get to know IJN </option>
+                    <option value="02">Access and waiting time</option>
+                    <option value="03">Information and accumulation</option>
+                    <option value="04">Patient and family right</option>
+                    <option value="05">Confident in health profesional</option>
+                    <option value="06">Safety of environment</option>
+                    <option value="07">Hyriene and cleanliness</option>
+                    <option value="08">food and baverages</option>
+                    <option value="09">Meet ecpectation ?</option>
+                    <option value="10">Recommend IJN - Emoji</option>
+                    <option value="11">Best Experience - Free Text</option>
+                    <option value="12"
+                      >Suggesstion for improvement- text</option
+                    >
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-control-label">Feedback </label>
+                  <input
+                    class="form-control"
+                    placeholder="Enter Your Answer"
+                    formControlName="feedback"
+                    type="text"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label class="form-control-label">Waiting Type </label>
+                  <select
+                    class="form-control"
+                    placeholder="Enter Your Answer"
+                    formControlName="waiting_type"
+                    type="time"
+                  >
+                    <option value="AD">Admission</option>
+                    <option value="DC">Discharge</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-control-label">Is Acceptable </label>
+                  <select
+                    class="form-control"
+                    placeholder="Enter Your Answer"
+                    formControlName="is_acceptable"
+                    type="text"
+                  >
+                    <option value="">Please Select</option>
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                  </select>
+                </div>
+              </form>
+            </div>
+            <div class="card-header bg-secondary text-center">
+              <button
+                class="btn btn-default"
+                type="submit"
+                (click)="addNewFeedbackAnswer()"
+              >
+                Submit
+              </button>
+            </div>
+          </div>
+          <!-- end tab feedback-->
+        </tab>
+        <tab>
+          <ng-template tabHeading>
+            <i class="ni ni-calendar-grid-58 mr-2"></i>Survey
+          </ng-template>
+
+          <!-- survey -->
+          <div class="card bg-secondary mt-2">
+            <div class="card-header bg-secondary">
+              <span class="text-danger">*</span>Please indicate your level of
+              agreement with the following statement regarding your experience
+              at this hospital.
+            </div>
+            <div class="card-body">
+              <form [formGroup]="surveyForm">
+                <div formArrayName="form">
+                  <div class="form-group">
+                    <label class="form-control-label">
+                      The staff was couteous and professional
+                    </label>
+
+                    <div class="col-md-12">
+                      <div class="row">
+                        <div class="col">
+                          <input name="11" type="radio" />
+                          <label class="pl-2">
+                            Strongly Agree
+                          </label>
+                        </div>
+                        <div class="col">
+                          <input name="22" type="radio" />
+                          <label class="pl-2">
+                            Agree
+                          </label>
+                        </div>
+                        <div class="col">
+                          <input name="33" type="radio" />
+                          <label class="pl-2">
+                            Neutral
+                          </label>
+                        </div>
+                        <div class="col">
+                          <input name="44" type="radio" />
+                          <label class="pl-2">
+                            Disagree
+                          </label>
+                        </div>
+                        <div class="col">
+                          <input name="55" type="radio" />
+                          <label class="pl-2">
+                            Strongly Disagree
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-control-label">
+                      The staff was responsive to my question and concern
+                    </label>
+
+                    <div class="col-md-12">
+                      <div class="row">
+                        <div class="col">
+                          <input name="q" type="radio" />
+                          <label class="pl-2">
+                            Strongly Agree
+                          </label>
+                        </div>
+                        <div class="col">
+                          <input name="w" type="radio" />
+                          <label class="pl-2">
+                            Agree
+                          </label>
+                        </div>
+                        <div class="col">
+                          <input name="e" type="radio" />
+                          <label class="pl-2">
+                            Neutral
+                          </label>
+                        </div>
+                        <div class="col">
+                          <input name="r" type="radio" />
+                          <label class="pl-2">
+                            Disagree
+                          </label>
+                        </div>
+                        <div class="col">
+                          <input name="t" type="radio" />
+                          <label class="pl-2">
+                            Strongly Disagree
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-control-label">
+                      It was easy to talk to the staff about my
+                      condition/symptom
+                    </label>
+
+                    <div class="col-md-12">
+                      <div class="row">
+                        <div class="col">
+                          <input name="a" type="radio" />
+                          <label class="pl-2">
+                            Strongly Agree
+                          </label>
+                        </div>
+                        <div class="col">
+                          <input name="s" type="radio" />
+                          <label class="pl-2">
+                            Agree
+                          </label>
+                        </div>
+                        <div class="col">
+                          <input name="d" type="radio" />
+                          <label class="pl-2">
+                            Neutral
+                          </label>
+                        </div>
+                        <div class="col">
+                          <input name="f" type="radio" />
+                          <label class="pl-2">
+                            Disagree
+                          </label>
+                        </div>
+                        <div class="col">
+                          <input name="g" type="radio" />
+                          <label class="pl-2">
+                            Strongly Disagree
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-control-label">
+                      The staff explained treatment/medicine in a way i could
+                      understand before administering
+                    </label>
+
+                    <div class="col-md-12">
+                      <div class="row">
+                        <div class="col">
+                          <input name="z" type="radio" />
+                          <label class="pl-2">
+                            Strongly Agree
+                          </label>
+                        </div>
+                        <div class="col">
+                          <input name="x" type="radio" />
+                          <label class="pl-2">
+                            Agree
+                          </label>
+                        </div>
+                        <div class="col">
+                          <input name="c" type="radio" />
+                          <label class="pl-2">
+                            Neutral
+                          </label>
+                        </div>
+                        <div class="col">
+                          <input name="v" type="radio" />
+                          <label class="pl-2">
+                            Disagree
+                          </label>
+                        </div>
+                        <div class="col">
+                          <input name="b" type="radio" />
+                          <label class="pl-2">
+                            Strongly Disagree
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-control-label">
+                      Do you thing the service given was value for money ?
+                    </label>
+
+                    <div class="col-md-12">
+                      <div class="row">
+                        <div class="col">
+                          <input name="qw" type="radio" />
+                          <label class="pl-2">
+                            Strongly Agree
+                          </label>
+                        </div>
+                        <div class="col">
+                          <input name="as" type="radio" />
+                          <label class="pl-2">
+                            Agree
+                          </label>
+                        </div>
+                        <div class="col">
+                          <input name="ds" type="radio" />
+                          <label class="pl-2">
+                            Neutral
+                          </label>
+                        </div>
+                        <div class="col">
+                          <input name="we" type="radio" />
+                          <label class="pl-2">
+                            Disagree
+                          </label>
+                        </div>
+                        <div class="col">
+                          <input name="er" type="radio" />
+                          <label class="pl-2">
+                            Strongly Disagree
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- <div
+                [formGroupName]="i"
+                *ngFor="
+                  let ind of surveyForm.get('form')?.controls;
+                  let i = index
+                "
+              > 
+                  <div class="row">
+                    <div
+                      class="col-md-12"
+                      *ngFor="let item of listSurveyQuestion"
+                    >
+                      <div class="form-group">
+                        <label class="form-control-label"
+                          >{{ item.question }}
+                        </label>
+                        <input
+                          class="form-control"
+                          placeholder="Enter Your Answer"
+                          formControlName="answer"
+                          type="text"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  </div> -->
+                </div>
+              </form>
+            </div>
+            <div class="card-header bg-secondary text-center">
+              <button
+                class="btn btn-default"
+                type="submit"
+                (click)="addNewSurveyAnswer()"
+              >
+                Submit
+              </button>
+            </div>
+          </div>
+          <!-- survey -->
+        </tab>
+      </tabset>
+    </div>
+  </div>
+</div>
+<!-- Footer -->
+<!-- <footer class="py-5" id="footer-main">
+  <div class="container">
+    <div class="row align-items-center justify-content-xl-between">
+      <div class="col-xl-6">
+        <div class="copyright text-center text-xl-left text-muted">
+          &copy;
+          <a
+            href="https://www.creative-tim.com?ref=adpa-presentation-page"
+            class="font-weight-bold ml-1"
+            target="_blank"
+            >MCMC - LAFMS</a
+          >
+        </div>
+      </div>
+      <div class="col-xl-6">
+        <ul
+          class="nav nav-footer justify-content-center justify-content-xl-end"
+        >
+          <li class="nav-item">
+            <a
+              href="https://www.creative-tim.com?ref=adpa-presentation-page"
+              class="nav-link"
+              target="_blank"
+              >Creative Tim</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              href="https://www.creative-tim.com/presentation?ref=adpa-presentation-page"
+              class="nav-link"
+              target="_blank"
+              >About Us</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              href="http://blog.creative-tim.com?ref=adpa-presentation-page"
+              class="nav-link"
+              target="_blank"
+              >Blog</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              href="https://www.creative-tim.com/license?ref=adpa-presentation-page"
+              class="nav-link"
+              target="_blank"
+              >License</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer> -->
+<ng-template #notify>
+  <div class="modal-header bg-info">
+    <button
+      aria-label="Close"
+      class="close"
+      data-dismiss="modal"
+      type="button"
+      (click)="closeModal()"
+    >
+      <span aria-hidden="true"> × </span>
+    </button>
+  </div>
+
+  <div class="modal-body bg-info">
+    <div class="py-3 text-center text-dark">
+      <i class="fas fa-info-circle ni-5x"></i>
+
+      <h4 class="heading mt-4 h1" style="font-size: 4rem;">Welcome to IJN!</h4>
+    </div>
+  </div>
+
+  <div class="modal-footer bg-info">
+    <button
+      class="btn btn-link text-white ml-auto"
+      data-dismiss="modal"
+      type="button"
+      (click)="closeModal()"
+    >
+      Close
+    </button>
+  </div>
+</ng-template>

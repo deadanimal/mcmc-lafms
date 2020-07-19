@@ -18,6 +18,7 @@ from notifications.serializers import (
     NotificationsSerializer
 )
 
+
 class NotificationsViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
     queryset = Notifications.objects.all()
     serializer_class = NotificationsSerializer
@@ -29,9 +30,8 @@ class NotificationsViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
         else:
             permission_classes = [AllowAny]
 
-        return [permission() for permission in permission_classes]    
+        return [permission() for permission in permission_classes]
 
-    
     def get_queryset(self):
         queryset = Notifications.objects.all()
 
@@ -45,9 +45,8 @@ class NotificationsViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
             company = company_employee[0].company
             
             if company.company_type == 'AD':
-                queryset = Notifications.objects.all()
+                queryset = Organisation.objects.all()
             else:
-                queryset = Notifications.objects.filter(company=company.id)
+                queryset = Organisation.objects.filter(company=company.id)
         """
-        return queryset    
- 
+        return queryset

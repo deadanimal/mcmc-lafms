@@ -1,0 +1,561 @@
+<div class="header pb-6">
+  <div class="container-fluid">
+    <div class="header-body">
+      <div class="row align-items-center py-4">
+        <div class="col-lg-6 col-7">
+          <h6 class="h2 text-dark d-inline-block mb-0">
+            License Management
+          </h6>
+          <!-- <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+            <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+              <li class="breadcrumb-item">
+                <a href="javascript:void(0)">
+                  <i class="fas fa-file-invoice text-white"></i>
+                </a>
+              </li>
+              <li class="breadcrumb-item">
+                <a href="javascript:void(0)" class="text-white">
+                  Quality Management
+                </a>
+              </li>
+              <li aria-current="page" class="breadcrumb-item active">
+                Complaint
+              </li>
+            </ol>
+          </nav> -->
+        </div>
+        <div class="col-lg-6 col-5 text-right">
+          <!-- <a
+            href="javascript:void(0)"
+            class="btn btn-sm btn-default"
+            (click)="openModal(addComplain, undefined)"
+          >
+            Add Complaint
+          </a> -->
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-4 col-md-6">
+          <div class="card card-stats">
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <h5 class="card-title text-uppercase text-muted mb-0">
+                    Total Applied License
+                  </h5>
+                  <span class="h2 font-weight-bold mb-0"> 350 </span>
+                </div>
+                <div class="col-auto">
+                  <div
+                    class="icon icon-shape bg-gradient-red text-white rounded-circle shadow"
+                  >
+                    <i class="ni ni-active-40"> </i>
+                  </div>
+                </div>
+              </div>
+              <!-- <p class="mt-3 mb-0 text-sm">
+                <span class="text-success mr-2">
+                  <i class="fa fa-arrow-up"> </i> 3.48%
+                </span>
+                <span class="text-nowrap"> Since last month </span>
+              </p> -->
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-4 col-md-6">
+          <div class="card card-stats">
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <h5 class="card-title text-uppercase text-muted mb-0">
+                     New Applied License
+                  </h5>
+                  <span class="h2 font-weight-bold mb-0"> 2,356 </span>
+                </div>
+                <div class="col-auto">
+                  <div
+                    class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow"
+                  >
+                    <i class="ni ni-chart-pie-35"> </i>
+                  </div>
+                </div>
+              </div>
+              <!-- <p class="mt-3 mb-0 text-sm">
+                <span class="text-success mr-2">
+                  <i class="fa fa-arrow-up"> </i> 3.48%
+                </span>
+                <span class="text-nowrap"> Since last month </span>
+              </p> -->
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-4 col-md-6">
+          <div class="card card-stats">
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <h5 class="card-title text-uppercase text-muted mb-0">
+                    Completed License
+                  </h5>
+                  <span class="h2 font-weight-bold mb-0"> 924 </span>
+                </div>
+                <div class="col-auto">
+                  <div
+                    class="icon icon-shape bg-gradient-green text-white rounded-circle shadow"
+                  >
+                    <i class="ni ni-money-coins"> </i>
+                  </div>
+                </div>
+              </div>
+              <!-- <p class="mt-3 mb-0 text-sm">
+                <span class="text-success mr-2">
+                  <i class="fa fa-arrow-up"> </i> 3.48%
+                </span>
+                <span class="text-nowrap"> Since last month </span>
+              </p> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid mt--6">
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="card">
+        <div class="card-header bg-secondary">
+          <div class="row align-items-center">
+            <div class="col">
+              <h6 class="text-uppercase text-muted ls-1 mb-1">Chart</h6>
+
+              <h5 class="h3 mb-0">Trend</h5>
+            </div>
+          </div>
+        </div>
+
+        <div style="width: 100%; height: 450px;" id="chartdivComplaint"></div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <div class="card-header bg-secondary">
+          <h3 class="m-0">List Of Complaint</h3>
+        </div>
+        <div class="dataTables_wrapper py-4">
+          <div class="row">
+            <div class="col-sm-12 col-md-6">
+              <div class="dataTables_length" id="datatable_length">
+                <label>
+                  Show
+                  <select
+                    name="datatable_length"
+                    aria-controls="datatable"
+                    class="form-control form-control-sm"
+                    (change)="entriesChange($event)"
+                  >
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                  </select>
+                  records
+                </label>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-6">
+              <!-- <div id="datatable_filter" class="dataTables_filter">
+                <label>
+                  <input
+                    type="search"
+                    class="form-control form-control-sm"
+                    placeholder="Search records"
+                    aria-controls="datatable"
+                    (keyup)="filterTable($event)"
+                  />
+                </label>
+              </div> -->
+            </div>
+          </div>
+
+          <ngx-datatable
+            class="bootstrap selection-cell"
+            [columnMode]="'force'"
+            [headerHeight]="50"
+            [footerHeight]="50"
+            [rowHeight]="'auto'"
+            [limit]="tableEntries != -1 ? tableEntries : undefined"
+            [rows]="listComplaint"
+            (activate)="onActivate($event)"
+          >
+            <ngx-datatable-column name="Index">
+              <ng-template
+                let-rowIndex="rowIndex"
+                let-row="row"
+                ngx-datatable-cell-template
+              >
+                <strong>{{ rowIndex + 1 }}</strong>
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column>
+              <ng-template ngx-datatable-header-template>
+                <span>Name</span>
+              </ng-template>
+              <ng-template let-row="row" ngx-datatable-cell-template
+                >{{ row.name }}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column>
+              <ng-template ngx-datatable-header-template>
+                <span>Email</span>
+              </ng-template>
+              <ng-template let-row="row" ngx-datatable-cell-template
+                >{{ row.email }}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column>
+              <ng-template ngx-datatable-header-template>
+                <span>Complaint Category</span>
+              </ng-template>
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <span *ngIf="row.complaint_category == 'VB'">Verbal</span>
+                <span *ngIf="row.complaint_category == 'TX'">Text</span>
+                <span *ngIf="row.complaint_category == 'NA'"
+                  >Not Available</span
+                >
+              </ng-template>
+            </ngx-datatable-column>
+
+            <!-- <ngx-datatable-column>
+              <ng-template ngx-datatable-header-template>
+                <span>Complaint To</span>
+              </ng-template>
+              <ng-template let-row="row" ngx-datatable-cell-template
+                >{{ row.complaint_to }}
+              </ng-template>
+            </ngx-datatable-column> -->
+
+            <ngx-datatable-column>
+              <ng-template ngx-datatable-header-template>
+                <span>Status</span>
+              </ng-template>
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <span
+                  class="badge badge-pill badge-info"
+                  *ngIf="row.status == 'SB'"
+                  >Submitted</span
+                >
+                <span
+                  class="badge badge-pill badge-warning"
+                  *ngIf="row.status == 'IP'"
+                  >In-Progress</span
+                >
+                <span
+                  class="badge badge-pill badge-success"
+                  *ngIf="row.status == 'CM'"
+                  >Completed</span
+                >
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column>
+              <ng-template ngx-datatable-header-template>
+                <span>Created</span>
+              </ng-template>
+              <ng-template let-row="row" ngx-datatable-cell-template
+                >{{ row.created_date | date: "dd/MM/yyyy" }}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column>
+              <ng-template ngx-datatable-header-template>
+                <span> Action</span>
+              </ng-template>
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <a
+                  (click)="openModal(editComplain, row)"
+                  style="cursor: pointer;"
+                  ><i class="fas fa-file-alt fa-2x"></i
+                ></a>
+                <!-- <a
+                              (click)="navigatePage('/admin//utility/user-detail', row.id)"
+                              style="cursor: pointer;"
+                              ><i class="fas fa-eye"></i></a
+                            > -->
+              </ng-template>
+            </ngx-datatable-column>
+          </ngx-datatable>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #editComplain>
+  <div class="modal-header bg-default">
+    <h6 class="modal-title text-white my-auto" id="modal-title-default">
+      Edit Complaint
+    </h6>
+
+    <button
+      aria-label="Close"
+      class="close"
+      data-dismiss="modal"
+      type="button"
+      (click)="closeModal()"
+    >
+      <span aria-hidden="true" class="text-white my-auto"> × </span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <form [formGroup]="editComplaintForm">
+      <!-- <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="form-control-label">Name</label>
+            <input
+              class="form-control"
+              placeholder="Enter Name"
+              formControlName="name"
+              type="text"
+            />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="form-control-label">Complaint Category</label>
+            <select
+              class="form-control"
+              placeholder="Enter Type"
+              formControlName="complaint_category"
+              type="text"
+            >
+              <option value="VB">Verbal</option>
+              <option value="TX">Text</option>
+              <option value="NA">Not Available</option>
+            </select>
+          </div>
+        </div>
+      </div> 
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="form-control-label">email</label>
+            <input
+              class="form-control"
+              placeholder="Enter Email"
+              formControlName="email"
+              type="text"
+            />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="form-control-label">Phone</label>
+            <input
+              class="form-control"
+              placeholder="Enter Phone"
+              formControlName="phone"
+              type="text"
+            />
+          </div>
+        </div>
+      </div> -->
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label class="form-control-label">Complaint To</label>
+            <select
+              class="form-control"
+              placeholder="Enter Module"
+              formControlName="complaint_to"
+              type="text"
+            >
+              <option value="">Please Choose</option>
+              <option *ngFor="let item of listUser" [value]="item.id">{{
+                item.username
+              }}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <div class="form-group">
+            <label class="form-control-label">Status</label>
+            <select
+              class="form-control"
+              placeholder="Enter Ticket Name"
+              formControlName="status"
+              type="text"
+            >
+              <option value="SB">Submitted</option>
+              <option value="IP">In-Progress</option>
+              <option value="CM">Completed</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <div class="form-group">
+            <label class="form-control-label">Tiket Name</label>
+            <input
+              class="form-control"
+              placeholder="Enter Ticket Name"
+              formControlName="ticket_name"
+              type="text"
+            />
+          </div>
+        </div>
+      </div>
+
+      <input name="id" formControlName="id" type="hidden" />
+    </form>
+  </div>
+
+  <div class="modal-footer">
+    <div class="text-center">
+      <button
+        class="btn btn-default"
+        type="submit"
+        (click)="editComplaintDetail()"
+      >
+        Save
+      </button>
+
+      <button
+        class="btn btn-outline-danger ml-auto"
+        data-dismiss="modal"
+        type="button"
+        (click)="closeModal()"
+      >
+        Close
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #addComplain>
+  <div class="modal-header bg-default">
+    <h6 class="modal-title text-white my-auto" id="modal-title-default">
+      Add New Complaint
+    </h6>
+
+    <button
+      aria-label="Close"
+      class="close"
+      data-dismiss="modal"
+      type="button"
+      (click)="closeModal()"
+    >
+      <span aria-hidden="true" class="text-white my-auto"> × </span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <form [formGroup]="addNewComplaintForm">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="form-control-label">Name</label>
+            <input
+              class="form-control"
+              placeholder="Enter Name"
+              formControlName="name"
+              type="text"
+            />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="form-control-label">Complaint Category</label>
+            <select
+              class="form-control"
+              placeholder="Enter Type"
+              formControlName="complaint_category"
+              type="text"
+            >
+              <option value="VB">Verbal</option>
+              <option value="TX">Text</option>
+              <option value="NA">Not Available</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="form-control-label">email</label>
+            <input
+              class="form-control"
+              placeholder="Enter Email"
+              formControlName="email"
+              type="text"
+            />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="form-control-label">Phone</label>
+            <input
+              class="form-control"
+              placeholder="Enter Phone"
+              formControlName="phone"
+              type="text"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="form-control-label">Complaint</label>
+            <input
+              class="form-control"
+              placeholder="Enter Complaint"
+              formControlName="complaint"
+              type="text"
+            />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="form-control-label">Document</label>
+            <input
+              class="form-control"
+              placeholder="Enter Phone"
+              formControlName="phone"
+              type="file"
+            />
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="modal-footer">
+    <div class="text-center">
+      <button class="btn btn-default" type="submit" (click)="addNewComplaint()">
+        Save
+      </button>
+
+      <button
+        class="btn btn-outline-danger ml-auto"
+        data-dismiss="modal"
+        type="button"
+        (click)="closeModal()"
+      >
+        Close
+      </button>
+    </div>
+  </div>
+</ng-template>
