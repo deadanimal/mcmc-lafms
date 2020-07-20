@@ -21,7 +21,7 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=True, cast=bool)
 
 ALLOWED_HOSTS = [
-    'https://mcmc-lafms-api.pipe.my',
+    'mcmc-lafms-api.pipe.my',
     '127.0.0.1'
 ]
 
