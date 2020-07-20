@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mcmc-lafms-api
+  labels:
+    service: mcmc-lafms-api
+spec:
+  selector:
+    app: mcmc-lafms-api
+  ports:
+  - port: 5000
+    targetPort: 5000

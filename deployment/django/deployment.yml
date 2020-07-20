@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mcmc-lafms-api-deployment
+  labels:
+    app: mcmc-lafms-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mcmc-lafms-api
+  template:
+    metadata:
+      labels:
+        app: mcmc-lafms-api
+    spec:
+      containers:
+      - name: mcmc-lafms-api
+        image: syafiqpipe/mcmc-lafms-api:1.0.0 #boleh tambah version
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5000
+        envFrom:
+          - secretRef:
+              name: mcmc-lafms-api-secret
