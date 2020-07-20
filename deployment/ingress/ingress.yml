@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: mcmc-lafms-my-ingress
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/cluster-issuer: "mcmc-lafms-my-prod"
+spec:
+  tls:
+  - hosts:
+    - mcmc-lafms.pipe.my
+    - mcmc-lafms-api.pipe.my
+
+    secretName: mcmc-lafms-my-prod
+
+  rules:
+  - host: mcmc-lafms-api.pipe.my
+    http:
+      paths:
+      - backend:
+          serviceName: mcmc-lafms-api
+          servicePort: 5000    
+  - host: mcmc-lafms.pipe.my
+    http:
+      paths:
+      - backend:
+          serviceName: mcmc-lafms-webapp
+          servicePort: 80    

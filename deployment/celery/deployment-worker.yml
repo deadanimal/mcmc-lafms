@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mcmc-lafms-api-celery-worker
+  labels:
+    deployment: mcmc-lafms-api-celery-worker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      pod: mcmc-lafms-api-celery-worker
+  template:
+    metadata:
+      labels:
+        pod: mcmc-lafms-api-celery-worker
+    spec:
+      containers:
+        - name: mcmc-lafms-api-celery-worker
+          image: syafiqpipe/mcmc-lafms-api
+          # celery -A mcmc-lafmsapi worker -l debug
+          command: ['celery', '-A', 'core', 'worker', '-l', 'info']
+          envFrom:
+            - secretRef:
+                name: mcmc-lafms-api-secret            
