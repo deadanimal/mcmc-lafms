@@ -26,6 +26,7 @@ import { RolloutBlockingIssuesComponent } from "./rollout-blocking-issues/rollou
 import { RolloutProjectManagementComponent } from "./rollout-project-management/rollout-project-management.component";
 import { RolloutPunchlistManagementComponent } from "./rollout-punchlist-management/rollout-punchlist-management.component";
 import { RolloutTroubleTicketManagementComponent } from "./rollout-trouble-ticket-management/rollout-trouble-ticket-management.component";
+import { ManagementAuditComponent } from "./management-audit/management-audit.component";
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { RolloutTroubleTicketManagementComponent } from "./rollout-trouble-ticke
     RolloutProjectManagementComponent,
     RolloutPunchlistManagementComponent,
     RolloutTroubleTicketManagementComponent,
+    ManagementAuditComponent,
   ],
   imports: [
     CommonModule,

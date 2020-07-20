@@ -128,23 +128,26 @@ export class ManagementUserComponent implements OnInit, OnDestroy {
     private loadingBar: LoadingBarService,
     private router: Router,
     private _route: ActivatedRoute
-  ) {}
-
-  ngOnInit() {
-    this.getCharts();
+  ) {
+    
     this.UserData.getAll().subscribe((res) => {
       this.listuser = res;
       this.tableRows = [...res];
-      console.log(this.listuser);
-      this.listuser = this.tableRows.map((prop, key) => {
-        // console.log("test =>", prop, key);
-        return {
-          ...prop,
-          // id: key,
-        };
-      });
+      console.log("list user = ", this.listuser);
+      // this.listuser = this.tableRows.map((prop, key) => {
+      //   // console.log("test =>", prop, key);
+      //   return {
+      //     ...prop,
+      //     // id: key,
+      //   };
+      // });
       // console.log("Svc: ", this.listuser);
     });
+    
+  }
+
+  ngOnInit() {
+    this.getCharts();
 
     this.registerForm = this.formBuilder.group({
       username: new FormControl(

@@ -265,8 +265,16 @@
                 >
                   <button class="btn btn-sm btn-info">
                     <i class="fas fa-edit"></i>
-                  </button>
-                </a>
+                  </button> </a
+                ><span *ngIf="row.application_status == 'CO'"
+                  >&nbsp;<a
+                    (click)="openModal(viewReceipt, undefined)"
+                    style="cursor: pointer;"
+                  >
+                    <button class="btn btn-sm btn-success">
+                      <i class="far fa-id-badge"></i>
+                    </button> </a
+                ></span>
               </ng-template>
             </ngx-datatable-column>
           </ngx-datatable>
@@ -275,10 +283,46 @@
     </div>
   </div>
 </div>
+
+<ng-template #viewReceipt>
+  <div class="modal-header bg-default">
+    <h6 class="modal-title text-white my-auto" id="modal-title-default">
+      View License Certification
+    </h6>
+
+    <button
+      aria-label="Close"
+      class="close"
+      data-dismiss="modal"
+      type="button"
+      (click)="closeModal()"
+    >
+      <span aria-hidden="true" class="text-white my-auto"> × </span>
+    </button>
+  </div>
+
+  <div class="modal-body bg-secondary">
+    <img src="../../../../../assets/img/default/license_cert.png" width="100%">
+  </div>
+
+  <div class="modal-footer bg-secondary">
+    <div class="text-center">
+      <button
+        class="btn btn-outline-danger ml-auto"
+        data-dismiss="modal"
+        type="button"
+        (click)="closeModal()"
+      >
+        Close
+      </button>
+    </div>
+  </div>
+</ng-template>
+
 <ng-template #editComplain>
   <div class="modal-header bg-default">
     <h6 class="modal-title text-white my-auto" id="modal-title-default">
-      Update License Application
+      Update Status Application
     </h6>
 
     <button
@@ -294,8 +338,6 @@
 
   <div class="modal-body">
     <form [formGroup]="editLicenseForm">
-      {{ editLicenseForm.value.count_no }}
-
       <div *ngIf="editLicenseForm.value.count_no == '4'">
         <div class="form-group">
           <label class="form-control-label">Status</label>

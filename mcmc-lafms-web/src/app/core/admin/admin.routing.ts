@@ -11,6 +11,7 @@ import { RolloutBlockingIssuesComponent } from "./rollout-blocking-issues/rollou
 import { RolloutProjectManagementComponent } from "./rollout-project-management/rollout-project-management.component";
 import { RolloutPunchlistManagementComponent } from "./rollout-punchlist-management/rollout-punchlist-management.component";
 import { RolloutTroubleTicketManagementComponent } from "./rollout-trouble-ticket-management/rollout-trouble-ticket-management.component";
+import { ManagementAuditComponent } from "./management-audit/management-audit.component";
 
 export const AdminRoutes: Routes = [
   {
@@ -59,7 +60,7 @@ export const AdminRoutes: Routes = [
       },
       {
         path: "audit-trail",
-        component: AuditTrailComponent,
+        component: ManagementAuditComponent,
       },
       {
         path: "users",

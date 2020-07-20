@@ -172,6 +172,16 @@
             [rows]="listuser"
             (activate)="onActivate($event)"
           >
+          <ngx-datatable-column name="Index">
+            <ng-template
+              let-rowIndex="rowIndex"
+              let-row="row"
+              ngx-datatable-cell-template
+            >
+              <strong>{{ rowIndex + 1 }}</strong>
+            </ng-template>
+          </ngx-datatable-column>
+
             <ngx-datatable-column>
               <ng-template ngx-datatable-header-template>
                 <span>Name</span>
@@ -192,19 +202,26 @@
 
             <ngx-datatable-column>
               <ng-template ngx-datatable-header-template>
-                <span>Date Of Birth</span>
+                <span>User Type</span>
               </ng-template>
               <ng-template let-row="row" ngx-datatable-cell-template
-                >{{ row.birth_date | date: "dd/MM/yyyy" }}
-              </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column>
-              <ng-template ngx-datatable-header-template>
-                <span>Mobile No</span>
-              </ng-template>
-              <ng-template let-row="row" ngx-datatable-cell-template
-                >{{ row.mobile_number }}
+                >
+                <span
+                *ngIf="row.user_type == 'LD'"
+                > Licensing Department
+                </span>
+                <span
+                *ngIf="row.user_type == 'RM'">
+                  Rollout Monitoring Department
+                </span>
+                <span
+                *ngIf="row.user_type == 'RA'">
+                  Revenue Assurance Department
+                </span>
+                <span
+                *ngIf="row.user_type == 'US'">
+                  User
+                </span>
               </ng-template>
             </ngx-datatable-column>
 
