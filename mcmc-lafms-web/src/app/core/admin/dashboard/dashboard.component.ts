@@ -45,7 +45,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   getCharts() {
     this.zone.runOutsideAngular(() => {
       this.getChart();
-      // this.getChart1();
+      this.getChart1();
       this.getChart2();
       this.getChartpie2();
     });
@@ -59,76 +59,68 @@ export class DashboardComponent implements OnInit, OnDestroy {
     chart.data = [
       {
         month: "Jan",
-        survey: 1,
-        application: 5,
+        Approved: 1,
+        Rejected: 5,
       },
       {
         month: "Feb",
-        survey: 3,
-        application: 2,
+        Approved: 3,
+        Rejected: 2,
       },
       {
         month: "Mar",
-        survey: 5,
-        application: 4,
+        Approved: 5,
+        Rejected: 4,
       },
       {
         month: "Apr",
-        survey: 3,
-        application: 3,
+        Approved: 3,
+        Rejected: 3,
       },
       {
         month: "May",
-        survey: 6,
-        application: 5,
+        Approved: 6,
+        Rejected: 5,
       },
       {
         month: "Jun",
-        survey: 2,
-        application: 4,
+        Approved: 2,
+        Rejected: 4,
       },
       {
         month: "Jul",
-        survey: 4,
-        application: 3,
+        Approved: 4,
+        Rejected: 3,
       },
       {
         month: "Aug",
-        survey: 6,
-        application: 5,
+        Approved: 6,
+        Rejected: 5,
       },
       {
         month: "Sep",
-        survey: 5,
-        application: 4,
+        Approved: 5,
+        Rejected: 4,
       },
       {
         month: "Oct",
-        survey: 5,
-        application: 5,
+        Approved: 5,
+        Rejected: 5,
       },
       {
         month: "Nov",
-        survey: 4,
-        application: 5,
+        Approved: 4,
+        Rejected: 5,
       },
       {
         month: "Dec",
-        survey: 5,
-        application: 6,
+        Approved: 5,
+        Rejected: 6,
       },
     ];
     // Create category axis
     let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
     categoryAxis.dataFields.category = "month";
-
-    categoryAxis.renderer.grid.template.location = 0;
-    categoryAxis.renderer.minGridDistance = 30;
-    categoryAxis.renderer.labels.template.horizontalCenter = "right";
-    categoryAxis.renderer.labels.template.verticalCenter = "middle";
-    categoryAxis.renderer.labels.template.rotation = 270;
-    categoryAxis.tooltip.disabled = true;
-    categoryAxis.renderer.minHeight = 110;
     // categoryAxis.renderer.opposite = true;
 
     // Create value axis
@@ -139,9 +131,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     // Create series
     let series1 = chart.series.push(new am4charts.LineSeries());
-    series1.dataFields.valueY = "survey";
+    series1.dataFields.valueY = "Approved";
     series1.dataFields.categoryX = "month";
-    series1.name = "Survey";
+    series1.name = "Approved Application";
     series1.strokeWidth = 3;
     series1.bullets.push(new am4charts.CircleBullet());
     series1.tooltipText = "Amount {name} in {categoryX}: {valueY}";
@@ -149,9 +141,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
     series1.visible = false;
 
     let series2 = chart.series.push(new am4charts.LineSeries());
-    series2.dataFields.valueY = "application";
+    series2.dataFields.valueY = "Rejected";
     series2.dataFields.categoryX = "month";
-    series2.name = "Application";
+    series2.name = "Rejected Application";
     series2.strokeWidth = 3;
     series2.bullets.push(new am4charts.CircleBullet());
     series2.tooltipText = "Amount {name} in {categoryX}: {valueY}";
@@ -165,125 +157,105 @@ export class DashboardComponent implements OnInit, OnDestroy {
     chart.legend = new am4charts.Legend();
   }
 
-  // getChart1() {
-  //   let chart = am4core.create("chartdivpie1", am4charts.PieChart);
-  //   chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
+  getChart1() {
+    let chart = am4core.create("chartdiv1", am4charts.PieChart);
+    chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
 
-  //   chart.data = [
-  //     {
-  //       item: "Lights",
-  //       value: 40,
-  //     },
-  //     {
-  //       item: "Fridge",
-  //       value: 30,
-  //     },
-  //     {
-  //       item: "TV",
-  //       value: 20,
-  //     },
-  //     {
-  //       item: "Washing Machine",
-  //       value: 16,
-  //     },
-  //   ];
-  //   chart.radius = am4core.percent(70);
-  //   chart.innerRadius = am4core.percent(40);
-  //   chart.startAngle = 180;
-  //   chart.endAngle = 360;
-
-  //   let series = chart.series.push(new am4charts.PieSeries());
-  //   series.dataFields.value = "value";
-  //   series.dataFields.category = "item";
-  //   series.ticks.template.disabled = true;
-  //   series.labels.template.disabled = true;
-
-  //   series.slices.template.cornerRadius = 10;
-  //   series.slices.template.innerCornerRadius = 7;
-  //   series.slices.template.draggable = true;
-  //   series.slices.template.inert = true;
-  //   series.alignLabels = false;
-
-  //   series.hiddenState.properties.startAngle = 90;
-  //   series.hiddenState.properties.endAngle = 90;
-
-  //   //chart.legend = new am4charts.Legend();
-  //   // this.chart1 = chart;
-  // }
-
-  getChartpie2() {
-    // let chart = am4core.create("piechartdiv111", am4charts.XYChart);
-    let chart = am4core.create("piechartdiv111", am4charts.XYChart);
-
-    // Add data
     chart.data = [
       {
-        name: "John",
-        points: 35654,
-        color: chart.colors.next(),
-        bullet: "https://www.amcharts.com/lib/images/faces/A04.png",
+        item: "Approved",
+        value: 40,
       },
       {
-        name: "Damon",
-        points: 65456,
-        color: chart.colors.next(),
-        bullet: "https://www.amcharts.com/lib/images/faces/C02.png",
+        item: "Rejected",
+        value: 30,
       },
       {
-        name: "Patrick",
-        points: 45724,
-        color: chart.colors.next(),
-        bullet: "https://www.amcharts.com/lib/images/faces/D02.png",
+        item: "Pending",
+        value: 20,
       },
+    ];
+    chart.radius = am4core.percent(70);
+    chart.innerRadius = am4core.percent(40);
+    chart.startAngle = 180;
+    chart.endAngle = 360;
+
+    let series = chart.series.push(new am4charts.PieSeries());
+    series.dataFields.value = "value";
+    series.dataFields.category = "item";
+    series.ticks.template.disabled = true;
+    series.labels.template.disabled = true;
+
+    series.slices.template.cornerRadius = 10;
+    series.slices.template.innerCornerRadius = 7;
+    series.slices.template.draggable = true;
+    series.slices.template.inert = true;
+    series.alignLabels = false;
+
+    series.hiddenState.properties.startAngle = 90;
+    series.hiddenState.properties.endAngle = 90;
+
+    //chart.legend = new am4charts.Legend();
+    // this.chart1 = chart;
+  }
+
+  getChartpie2() {
+    let chart = am4core.create("piechartdiv111", am4charts.PieChart);
+
+    // Add and configure Series
+    let pieSeries = chart.series.push(new am4charts.PieSeries());
+    pieSeries.dataFields.value = "value";
+    pieSeries.dataFields.category = "task";
+
+    // Let's cut a hole in our Pie chart the size of 30% the radius
+    chart.innerRadius = am4core.percent(30);
+
+    // Put a thick white border around each Slice
+    pieSeries.slices.template.stroke = am4core.color("#fff");
+    pieSeries.slices.template.strokeWidth = 2;
+    pieSeries.slices.template.strokeOpacity = 1;
+    // change the cursor on hover to make it apparent the object can be interacted with
+    pieSeries.slices.template.cursorOverStyle = [
       {
-        name: "Mark",
-        points: 13654,
-        color: chart.colors.next(),
-        bullet: "https://www.amcharts.com/lib/images/faces/E01.png",
+        property: "cursor",
+        value: "pointer",
       },
     ];
 
-    // Create axes
-    let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
-    categoryAxis.dataFields.category = "name";
-    categoryAxis.renderer.grid.template.disabled = true;
-    categoryAxis.renderer.minGridDistance = 30;
-    categoryAxis.renderer.inside = true;
-    categoryAxis.renderer.labels.template.fill = am4core.color("#fff");
-    categoryAxis.renderer.labels.template.fontSize = 20;
+    pieSeries.alignLabels = false;
+    pieSeries.labels.template.bent = true;
+    pieSeries.labels.template.radius = 3;
+    pieSeries.labels.template.padding(0, 0, 0, 0);
 
-    let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-    valueAxis.renderer.grid.template.strokeDasharray = "4,4";
-    valueAxis.renderer.labels.template.disabled = true;
-    valueAxis.min = 0;
+    pieSeries.ticks.template.disabled = true;
 
-    // Do not crop bullets
-    chart.maskBullets = false;
+    // Create a base filter effect (as if it's not there) for the hover to return to
+    let shadow = pieSeries.slices.template.filters.push(
+      new am4core.DropShadowFilter()
+    );
+    shadow.opacity = 0;
 
-    // Remove padding
-    chart.paddingBottom = 0;
+    // Create hover state
+    let hoverState = pieSeries.slices.template.states.getKey("hover"); // normally we have to create the hover state, in this case it already exists
 
-    // Create series
-    let series = chart.series.push(new am4charts.ColumnSeries());
-    series.dataFields.valueY = "points";
-    series.dataFields.categoryX = "name";
-    series.columns.template.propertyFields.fill = "color";
-    series.columns.template.propertyFields.stroke = "color";
-    series.columns.template.column.cornerRadiusTopLeft = 15;
-    series.columns.template.column.cornerRadiusTopRight = 15;
-    series.columns.template.tooltipText = "{categoryX}: [bold]{valueY}[/b]";
+    // Slightly shift the shadow and make it more prominent on hover
+    let hoverShadow = hoverState.filters.push(new am4core.DropShadowFilter());
+    hoverShadow.opacity = 0.7;
+    hoverShadow.blur = 5;
 
-    // Add bullets
-    let bullet = series.bullets.push(new am4charts.Bullet());
-    let image = bullet.createChild(am4core.Image);
-    image.horizontalCenter = "middle";
-    image.verticalCenter = "bottom";
-    image.dy = 20;
-    image.y = am4core.percent(100);
-    image.propertyFields.href = "bullet";
-    image.tooltipText = series.columns.template.tooltipText;
-    image.propertyFields.fill = "color";
-    image.filters.push(new am4core.DropShadowFilter());
+    // Add a legend
+    chart.legend = new am4charts.Legend();
+
+    chart.data = [
+      {
+        task: "Approved Application",
+        value: 501.9,
+      },
+      {
+        task: "Rejected Application",
+        value: 304.8,
+      },
+    ];
   }
 
   getChart2() {

@@ -68,12 +68,12 @@ export const ROUTES: RouteInfo[] = [
     icontype: "fas fa-sliders-h text-default",
   },
 
-  {
-    path: "/admin/organisations",
-    title: "Organisations",
-    type: "link",
-    icontype: "fas fa-cogs text-default",
-  },
+  // {
+  //   path: "/admin/organisations",
+  //   title: "Organisations",
+  //   type: "link",
+  //   icontype: "fas fa-cogs text-default",
+  // },
 
   {
     path: "/admin/audit-trail",
@@ -148,12 +148,12 @@ export const ROUTESRMD: RouteInfo[] = [
     icontype: "fas fa-sliders-h text-default",
   },
 
-  {
-    path: "/rmd/organisations",
-    title: "Organisations",
-    type: "link",
-    icontype: "fas fa-cogs text-default",
-  },
+  // {
+  //   path: "/rmd/organisations",
+  //   title: "Organisations",
+  //   type: "link",
+  //   icontype: "fas fa-cogs text-default",
+  // },
 
   {
     path: "/rmd/audit-trail",
@@ -228,12 +228,12 @@ export const ROUTESRAD: RouteInfo[] = [
     icontype: "fas fa-sliders-h text-default",
   },
 
-  {
-    path: "/rad/organisations",
-    title: "Organisations",
-    type: "link",
-    icontype: "fas fa-cogs text-default",
-  },
+  // {
+  //   path: "/rad/organisations",
+  //   title: "Organisations",
+  //   type: "link",
+  //   icontype: "fas fa-cogs text-default",
+  // },
 
   {
     path: "/rad/audit-trail",

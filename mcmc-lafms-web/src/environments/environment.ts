@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   // baseUrl: 'https://www.api.prototype.com.my/',
+  // baseUrl: "https://mcmc-lafms-api-pipe.com.my/",
   baseUrl: "http://127.0.0.1:8000/",
   mapbox: {
     accessToken:

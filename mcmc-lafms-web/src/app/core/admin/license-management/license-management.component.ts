@@ -79,14 +79,6 @@ export class LicenseManagementComponent implements OnInit, OnDestroy {
   searchField: FormGroup;
   addNewLicenseForm: FormGroup;
   editLicenseForm: FormGroup;
-  editAuditFormMessages = {
-    Licensename: [
-      // { type: "required", message: "Email is required" },
-      { type: "required", message: "A valid email is required" },
-    ],
-    active: [{ type: "required", message: "Name is required" }],
-    enable: [{ type: "required", message: "Name is required" }],
-  };
 
   json;
 
@@ -101,7 +93,42 @@ export class LicenseManagementComponent implements OnInit, OnDestroy {
     private loadingBar: LoadingBarService,
     private router: Router,
     private _route: ActivatedRoute
-  ) {
+  ) {}
+
+  ngOnInit() {
+    this.getCharts();
+
+    // this.UserData.getAll().subscribe((res) => {
+    //   this.listUser = res;
+    //   console.log("qweqwe ", res);
+    // });
+
+    this.editLicenseForm = this.formBuilder.group({
+      id: new FormControl(""),
+      name: new FormControl(""),
+      email: new FormControl(""),
+      nric: new FormControl(""),
+      mobile_number: new FormControl(""),
+      address: new FormControl(""),
+      general_description: new FormControl(""),
+      signature: new FormControl(""),
+      office_number: new FormControl(""),
+      fax: new FormControl(""),
+      created_date: new FormControl(""),
+      modified_date: new FormControl(""),
+      company_status: new FormControl(""),
+      company_name: new FormControl(""),
+      application_status: new FormControl(""),
+      reg_date: new FormControl(""),
+      count_no: new FormControl(""),
+      licence_type: new FormControl(""),
+      licence_details_type: new FormControl(""),
+      note: new FormControl(""),
+      // document1: new FormControl(""),
+    });
+  }
+
+  ngAfterViewInit(): void {
     this.LicenseData.getAll().subscribe((res) => {
       this.listLicense = res;
       this.tableRows = [...res];
@@ -118,36 +145,21 @@ export class LicenseManagementComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnInit() {
-    this.getCharts();
-
-    // this.UserData.getAll().subscribe((res) => {
-    //   this.listUser = res;
-    //   console.log("qweqwe ", res);
-    // });
-
-    this.editLicenseForm = this.formBuilder.group({
-      id: new FormControl(""),
-      name: new FormControl(""),
-      email: new FormControl(""),
-      nric: new FormControl(""),
-      address: new FormControl(""),
-      general_description: new FormControl(""),
-      signature: new FormControl(""),
-      office_number: new FormControl(""),
-      fax: new FormControl(""),
-      mobile_number: new FormControl(""),
-      created_date: new FormControl(""),
-      modified_date: new FormControl(""),
-    });
-  }
-
   editLicenseDetail() {
     // console.log("qqqq");
     this.loadingBar.start();
     // this.loadingBar.complete();
     // this.successEditMessage();
-    console.log("qqqq", this.editLicenseForm.value.status);
+    if(this.editLicenseForm.value.count_no == '1'){
+      this.editLicenseForm.value.count_no = '2';
+    } else if (this.editLicenseForm.value.count_no == '2'){
+      this.editLicenseForm.value.count_no = '3';
+    } else if (this.editLicenseForm.value.count_no == '3'){
+      this.editLicenseForm.value.count_no = '4';
+    } else if (this.editLicenseForm.value.count_no == '4'){
+      this.editLicenseForm.value.count_no = '5';
+    } 
+    console.log("wwww", this.editLicenseForm.value);
     this.LicenseData.update(
       this.editLicenseForm.value.id,
       this.editLicenseForm.value
@@ -275,16 +287,33 @@ export class LicenseManagementComponent implements OnInit, OnDestroy {
     });
   }
 
-  openModal(modalRef: TemplateRef<any>, row) {
+  openModalsm(modalRef: TemplateRef<any>, row) {
     if (row) {
       console.log(row);
-      this.editLicenseForm.patchValue(row);
+      this.editLicenseForm.patchValue({
+        ...row,
+      });
+      console.log(this.editLicenseForm.value);
     }
     // this.modal = this.modalService.show(
     //   modalRef,
-    //   Object.assign({}, { class: "gray modal-xl" })
+    //   Object.assign({}, { class: "gray modal-lg" })
     // );
     this.modal = this.modalService.show(modalRef, this.modalConfig);
+  }
+  openModal(modalRef: TemplateRef<any>, row) {
+    if (row) {
+      console.log(row);
+      this.editLicenseForm.patchValue({
+        ...row,
+      });
+      console.log(this.editLicenseForm.value);
+    }
+    this.modal = this.modalService.show(
+      modalRef,
+      Object.assign({}, { class: "gray modal-lg" })
+    );
+    // this.modal = this.modalService.show(modalRef, this.modalConfig);
   }
 
   closeModal() {

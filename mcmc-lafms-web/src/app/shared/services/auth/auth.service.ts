@@ -76,7 +76,6 @@ export class AuthService {
         this.username = decodedToken.username;
         this.userID = decodedToken.user_id;
         this.userType = decodedToken.user_type;
-        console.log(this.userType);
         console.log("Decoded token: ", decodedToken);
         // console.log('Post response: ', res)
         // console.log('Refresh token', this.tokenRefresh)

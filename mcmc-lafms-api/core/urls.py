@@ -1,6 +1,6 @@
-from api_basic.views import (
-    ApiBasicViewSet
-)
+# from api_basic.views import (
+#     ApiBasicViewSet
+# )
 from organisations.views import (
     OrganisationViewSet
 )
@@ -56,12 +56,12 @@ organisations_router = router.register(
     'organisations', OrganisationViewSet
 )
 
-# api basic app
+# # api basic app
 
 
-api_basic_router = router.register(
-    'api-basic', ApiBasicViewSet
-)
+# api_basic_router = router.register(
+#     'api-basic', ApiBasicViewSet
+# )
 
 # # documents app
 

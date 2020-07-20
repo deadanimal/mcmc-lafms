@@ -82,9 +82,9 @@ export class LicenseComponent implements OnInit, OnDestroy {
   // Form
   searchForm: FormGroup;
   searchField: FormGroup;
-  addNewLicenseForm: FormGroup;
   editLicenseForm: FormGroup;
-  addLicenseForm: FormGroup;
+  addNewLicenseForm: FormGroup;
+
   editAuditFormMessages = {
     Licensename: [
       // { type: "required", message: "Email is required" },
@@ -93,6 +93,9 @@ export class LicenseComponent implements OnInit, OnDestroy {
     active: [{ type: "required", message: "Name is required" }],
     enable: [{ type: "required", message: "Name is required" }],
   };
+
+  classLicense: any;
+  IndividualLicense: any;
 
   json;
 
@@ -106,23 +109,47 @@ export class LicenseComponent implements OnInit, OnDestroy {
     private loadingBar: LoadingBarService,
     private router: Router,
     private _route: ActivatedRoute
-  ) {}
-
-  ngOnInit() {
-    // this.getCharts();
+  ) {
     this.LicenseData.getAll().subscribe((res) => {
       this.listLicense = res;
       this.tableRows = [...res];
 
-      console.log(this.tableRows);
-      this.listLicense = this.tableRows.map((prop, key) => {
-        // console.log("test =>", prop, key);
-        return {
-          ...prop,
-          // id: key,
-        };
-      });
+      // console.log(this.tableRows);
+      // this.listLicense = this.tableRows.map((prop, key) => {
+      //   // console.log("test =>", prop, key);
+      //   return {
+      //     ...prop,
+      //     // id: key,
+      //   };
+      // });
       // console.log("Svc: ", this.listLicense);
+    });
+  }
+
+  ngOnInit() {
+    // this.getCharts();
+
+    this.addNewLicenseForm = this.formBuilder.group({
+      // id: new FormControl(""),
+      name: new FormControl(""),
+      email: new FormControl(""),
+      nric: new FormControl(""),
+      mobile_number: new FormControl(""),
+      address: new FormControl(""),
+      general_description: new FormControl(""),
+      signature: new FormControl(""),
+      office_number: new FormControl(""),
+      fax: new FormControl(""),
+      created_date: new FormControl(""),
+      modified_date: new FormControl(""),
+      company_status: new FormControl(""),
+      company_name: new FormControl(""),
+      // application_status: new FormControl("NA"),
+      reg_date: new FormControl(""),
+      count_no: new FormControl(""),
+      licence_type: new FormControl(""),
+      licence_details_type: new FormControl(""),
+      // document1: new FormControl(""),
     });
 
     this.editLicenseForm = this.formBuilder.group({
@@ -130,29 +157,22 @@ export class LicenseComponent implements OnInit, OnDestroy {
       name: new FormControl(""),
       email: new FormControl(""),
       nric: new FormControl(""),
+      mobile_number: new FormControl(""),
       address: new FormControl(""),
       general_description: new FormControl(""),
       signature: new FormControl(""),
       office_number: new FormControl(""),
       fax: new FormControl(""),
-      mobile_number: new FormControl(""),
       created_date: new FormControl(""),
       modified_date: new FormControl(""),
-    });
-
-    this.addLicenseForm = this.formBuilder.group({
-      id: new FormControl(""),
-      name: new FormControl(""),
-      email: new FormControl(""),
-      nric: new FormControl(""),
-      address: new FormControl(""),
-      general_description: new FormControl(""),
-      signature: new FormControl(""),
-      office_number: new FormControl(""),
-      fax: new FormControl(""),
-      mobile_number: new FormControl(""),
-      created_date: new FormControl(""),
-      modified_date: new FormControl(""),
+      company_status: new FormControl(""),
+      company_name: new FormControl(""),
+      application_status: new FormControl(""),
+      reg_date: new FormControl(""),
+      count_no: new FormControl(""),
+      licence_type: new FormControl(""),
+      licence_details_type: new FormControl(""),
+      // document1: new FormControl(""),
     });
   }
 
@@ -160,21 +180,21 @@ export class LicenseComponent implements OnInit, OnDestroy {
     // console.log("qqqq");
     this.loadingBar.start();
     // this.successMessage();
-    console.log(this.addNewLicenseForm.value);
+    console.log("qweqwe ", this.addNewLicenseForm.value);
     this.LicenseData.create(this.addNewLicenseForm.value).subscribe(
       () => {
         // Success
         // this.isLoading = false
         // this.successMessage();
-        this.successAlert("add new");
+        this.successAlert("add new license");
         this.loadingBar.complete();
-        this.navigatePage('/user/license')
-        // window.location.reload();
+        // this.navigatePage("/user/license");
+        window.location.reload();
       },
       () => {
         // Failed
         // this.isLoading = false
-        this.errorAlert("add new");
+        this.errorAlert("add new license");
       },
       () => {
         // After
@@ -198,14 +218,14 @@ export class LicenseComponent implements OnInit, OnDestroy {
         // Success
         // this.isLoading = false
         // this.successMessage();
-        this.successAlert("edit");
-        // window.location.reload();
+        this.successAlert("edit license");
+        window.location.reload();
       },
       () => {
         // Failed
         // this.isLoading = false
         // this.successMessage();
-        this.errorAlert("edit");
+        this.errorAlert("edit license");
       },
       () => {
         // After
@@ -213,6 +233,12 @@ export class LicenseComponent implements OnInit, OnDestroy {
         // this.navigateHomePage();
       }
     );
+  }
+
+  changeData($event) {
+    console.log($event);
+    if ($event == "") {
+    }
   }
 
   navigatePage(path: String) {
@@ -251,7 +277,7 @@ export class LicenseComponent implements OnInit, OnDestroy {
   successAlert(task) {
     swal.fire({
       title: "Success",
-      text: "Successfully " + task + " compliance!",
+      text: "Successfully " + task,
       type: "success",
       buttonsStyling: false,
       confirmButtonClass: "btn btn-success",
@@ -312,15 +338,16 @@ export class LicenseComponent implements OnInit, OnDestroy {
   }
 
   openModal(modalRef: TemplateRef<any>, row) {
+    console.log(row);
     if (row) {
       console.log(row);
       this.editLicenseForm.patchValue(row);
     }
-    // this.modal = this.modalService.show(
-    //   modalRef,
-    //   Object.assign({}, { class: "gray modal-xl" })
-    // );
-    this.modal = this.modalService.show(modalRef, this.modalConfig);
+    this.modal = this.modalService.show(
+      modalRef,
+      Object.assign({}, { class: "gray modal-lg" })
+    );
+    // this.modal = this.modalService.show(modalRef, this.modalConfig);
   }
 
   closeModal() {
