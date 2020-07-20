@@ -144,12 +144,12 @@ USE_TZ = True
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_WHITELIST = [
-    'https://https://mcmc-lafms-api.pipe.com.my',
+    'https://mcmc-lafms-api.pipe.com.my',
     'http://127.0.0.1',
     'http://localhost'
 ]
 CORS_ORIGIN_REGEX_WHITELIST = [
-    'https://https://mcmc-lafms-api.pipe.com.my',
+    'https://mcmc-lafms-api.pipe.com.my',
     'http://127.0.0.1',
     'http://localhost'
 ]
