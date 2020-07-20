@@ -127,11 +127,57 @@
   <div class="row">
     <div class="col-md-12">
       <div class="card">
-        <mat-horizontal-stepper labelPosition="bottom" #stepper>
-          <mat-step>
-            <ng-template matStepLabel>Information</ng-template>
+        <div class="card-header bg-secondary">
+          <h3 class="m-0">List Of License</h3>
+        </div>
+        <!-- <mat-horizontal-stepper labelPosition="bottom" #stepper>
+          <mat-step [stepControl]="firstFormGroup">
+            <ng-template matStepLabel>Personal</ng-template> -->
 
-            <!-- maklumat penjaga -->
+        <!-- maklumat penjaga -->
+        <div class="card-body">
+          <form [formGroup]="addNewLicenseForm">
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label class="form-control-label">License Type</label>
+                  <select
+                    class="form-control"
+                    placeholder="Enter Type"
+                    formControlName="licence_type"
+                    (change)="changeData($event)"
+                  >
+                    <option value="IL">Individual License</option>
+                    <option value="CL">Class License</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label class="form-control-label">License Details</label>
+                  <select
+                    class="form-control"
+                    placeholder="Enter Details"
+                    formControlName="licence_details_type"
+                  >
+                    <option value="NE">New</option>
+                    <option value="RE">Renewal</option>
+                    <option value="VS"
+                      >Variation of Special licence condition</option
+                    >
+                    <option value="TR">Transfer</option>
+                    <option value="SU">Surrender</option>
+                    <option value="CO">Change of particulars</option>
+                    <option value="RO">Replacement of licence</option>
+                    <option value="CL">Copy of Licence Request</option>
+                    <option value="RR">Re-Registration</option>
+                    <option value="CR"
+                      >Copy of registration notice request'</option
+                    >
+                  </select>
+                </div>
+              </div>
+            </div>
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group">
@@ -139,6 +185,8 @@
                   <input
                     class="form-control"
                     placeholder="Enter Name"
+                    formControlName="name"
+                    name="name"
                     type="text"
                   />
                 </div>
@@ -146,10 +194,12 @@
 
               <div class="col-md-6">
                 <div class="form-group">
-                  <label class="form-control-label">Amount</label>
+                  <label class="form-control-label">NRIC</label>
                   <input
                     class="form-control"
-                    placeholder="Enter Amount"
+                    placeholder="Enter NRIC"
+                    formControlName="nric"
+                    name="nric"
                     type="text"
                   />
                 </div>
@@ -159,10 +209,12 @@
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group">
-                  <label class="form-control-label">Department</label>
+                  <label class="form-control-label">Email</label>
                   <input
                     class="form-control"
-                    placeholder="Enter Department"
+                    placeholder="Enter Email"
+                    formControlName="email"
+                    name="email"
                     type="text"
                   />
                 </div>
@@ -170,34 +222,37 @@
 
               <div class="col-md-6">
                 <div class="form-group">
-                  <label class="form-control-label">Notes/Reason</label>
+                  <label class="form-control-label">Mobile Number</label>
                   <input
                     class="form-control"
-                    placeholder="Enter Reason"
-                    type="datetime-local"
+                    placeholder="Enter Mobile Number"
+                    formControlName="mobile_number"
+                    name="mobile_number"
+                    type="text"
                   />
                 </div>
               </div>
             </div>
             <!-- maklumat penjaga -->
 
-            <div class="text-right">
+            <!-- <div class="text-right">
               <button mat-button matStepperPrevious>Back</button>
               <button mat-button matStepperNext>Next</button>
             </div>
           </mat-step>
 
           <mat-step>
-            <ng-template matStepLabel>Item </ng-template>
+            <ng-template matStepLabel>Organization </ng-template> -->
 
             <!-- maklumat akademik -->
             <div class="row">
               <div class="col">
                 <div class="form-group">
-                  <label class="form-control-label">Item</label>
+                  <label class="form-control-label">Company Name</label>
                   <input
                     class="form-control"
-                    placeholder="Masukkan Gred/Pangkat"
+                    placeholder="Enter Company Name"
+                    formControlName="company_name"
                     type="text"
                   />
                 </div>
@@ -205,74 +260,76 @@
 
               <div class="col">
                 <div class="form-group">
-                  <label class="form-control-label">Date</label>
+                  <label class="form-control-label"
+                    >Company Registration Date</label
+                  >
                   <input
                     class="form-control"
-                    placeholder="Masukkan Sekolah"
-                    type="datetime-local"
+                    placeholder="Enter Sekolah"
+                    formControlName="reg_date"
+                    type="date"
                   />
                 </div>
               </div>
             </div>
-            <br />
-            <h3 class="m-0">Item</h3>
-            <br />
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label class="form-control-label">Item Name</label>
-                  <input
-                    class="form-control"
-                    placeholder="Enter Name"
-                    type="text"
-                  />
-                </div>
-              </div>
 
-              <div class="col-md-4">
+            <div class="row">
+              <div class="col">
                 <div class="form-group">
-                  <label class="form-control-label">Type</label>
-                  <select class="form-control" placeholder="" type="text">
-                    <option checked>choose</option>
-                    <option>Standard Purchase Orders (PO)</option>
-                    <option>Planned Purchase Orders (PPO)</option>
-                    <option>Blanket Purchase Orders (BPO) </option>
-                    <option>Contract Purchase Orders (CPO)</option>
+                  <label class="form-control-label">Company Status</label>
+                  <select
+                    class="form-control"
+                    placeholder="Enter Status"
+                    formControlName="company_status"
+                  >
+                    <option value="CO" checked>Company</option>
+                    <option value="PA">Partnership</option>
+                    <option value="IN">Individual</option>
+                    <option value="SO">Society</option>
+                    <option value="OT">Others</option>
                   </select>
                 </div>
               </div>
 
-              <div class="col-md-2 pt-1 text-right">
-                <div class="form-group pt-1">
-                  <label class="form-control-label"></label>
-                  <br />
-                  <i class="fa fa-trash-alt fa-2x"></i>
+              <div class="col">
+                <div class="form-group">
+                  <label class="form-control-label">Office Number</label>
+                  <input
+                    class="form-control"
+                    placeholder="Enter  Number"
+                    formControlName="office_number"
+                    type="text"
+                  />
                 </div>
               </div>
-              <span class="text-blue"> <i class="fa fa-plus"></i> Add </span>
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label class="form-control-label">Fax</label>
+                  <input
+                    class="form-control"
+                    placeholder="Enter Fax"
+                    formControlName="fax"
+                    type="text"
+                  />
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label class="form-control-label">General Description</label>
+                  <input
+                    class="form-control"
+                    placeholder="Enter Mobile Number"
+                    formControlName="general_description"
+                    type="text"
+                  />
+                </div>
+              </div>
             </div>
             <!-- maklumat akademik -->
 
-            <div class="text-right">
-              <button mat-button matStepperPrevious>Back</button>
-              <button mat-button matStepperNext>Next</button>
-            </div>
-          </mat-step>
-          <mat-step>
-            <ng-template matStepLabel>Supporting Document</ng-template>
-            <!-- dokumen  -->
-            <div class="form-group">
-              <label class="form-control-label">Receipt</label>
-              <input class="form-control" type="file" />
-            </div>
-
-            <div class="form-group">
-              <label class="form-control-label">Request Form</label>
-              <input class="form-control" type="file" />
-            </div>
-            <!-- dokumen -->
-
-            <div class="text-right">
+            <!-- <div class="text-right">
               <button mat-button matStepperPrevious>Back</button>
               <button mat-button matStepperNext>Next</button>
             </div>
@@ -289,7 +346,27 @@
               <button mat-button>Save</button>
             </div>
           </mat-step>
-        </mat-horizontal-stepper>
+          </mat-horizontal-stepper> -->
+            <!-- <input
+              formControlName="application_status"
+              value="NA"
+              type="hidden"
+            /> -->
+            <input formControlName="count_no" [ngModel]="1" type="hidden" />
+          </form>
+        </div>
+
+        <div class="card-footer">
+          <div class="text-center">
+            <button
+              class="btn btn-default"
+              type="submit"
+              (click)="addNewLicense()"
+            >
+              Submit
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -381,24 +458,29 @@
 
             <ngx-datatable-column>
               <ng-template ngx-datatable-header-template>
-                <span>License Category</span>
+                <span>Organization Category</span>
               </ng-template>
               <ng-template let-row="row" ngx-datatable-cell-template>
-                <span
-                  class="badge badge-pill badge-info"
-                  *ngIf="row.status == 'OP'"
-                  >Open</span
+                <span *ngIf="row.company_status == 'CO'">Company</span>
+                <span *ngIf="row.company_status == 'PA'">Partnership</span>
+                <span *ngIf="row.company_status == 'IN'">Individual</span>
+                <span *ngIf="row.company_status == 'SO'">Society</span>
+                <span *ngIf="row.company_status == 'OT'">Others</span>
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column>
+              <ng-template ngx-datatable-header-template>
+                <span>Application Status</span>
+              </ng-template>
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <span *ngIf="row.application_status == 'RE'">Reviewed</span>
+                <span *ngIf="row.application_status == 'NA'"
+                  >New Application</span
                 >
-                <span
-                  class="badge badge-pill badge-success"
-                  *ngIf="row.status == 'CS'"
-                  >Close</span
-                >
-                <span
-                  class="badge badge-pill badge-warning"
-                  *ngIf="row.status == 'NA'"
-                  >Not Available</span
-                >
+                <span *ngIf="row.application_status == 'EV'">Evaluated</span>
+                <span *ngIf="row.application_status == 'AP'">Approved</span>
+                <span *ngIf="row.application_status == 'CO'">Completed</span>
               </ng-template>
             </ngx-datatable-column>
 
@@ -419,8 +501,10 @@
                 <a
                   (click)="openModal(editComplain, row)"
                   style="cursor: pointer;"
-                  ><i class="fas fa-file-alt fa-2x"></i
+                  ><button class="btn btn-sm btn-info">
+                    <i class="fas fa-edit"></i></button
                 ></a>
+
                 <!-- <a
                                 (click)="navigatePage('/admin//utility/user-detail', row.id)"
                                 style="cursor: pointer;"
@@ -434,10 +518,11 @@
     </div>
   </div>
 </div>
+
 <ng-template #editComplain>
   <div class="modal-header bg-default">
     <h6 class="modal-title text-white my-auto" id="modal-title-default">
-      Change status
+      Edit License
     </h6>
 
     <button
@@ -451,23 +536,140 @@
     </button>
   </div>
 
-  <div class="modal-body">
+  <div class="modal-body bg-secondary">
     <form [formGroup]="editLicenseForm">
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
           <div class="form-group">
-            <label class="form-control-label">Status</label>
+            <label class="form-control-label">Nama</label>
+            <input
+              class="form-control"
+              placeholder="Enter Name"
+              formControlName="name"
+              name="name"
+              type="text"
+            />
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="form-control-label">NRIC</label>
+            <input
+              class="form-control"
+              placeholder="Enter NRIC"
+              formControlName="nric"
+              name="nric"
+              type="text"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="form-control-label">Email</label>
+            <input
+              class="form-control"
+              placeholder="Enter Email"
+              formControlName="email"
+              name="email"
+              type="text"
+            />
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="form-control-label">Mobile Number</label>
+            <input
+              class="form-control"
+              placeholder="Enter Mobile Number"
+              formControlName="mobile_number"
+              name="mobile_number"
+              type="text"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label class="form-control-label">Company Name</label>
+            <input
+              class="form-control"
+              placeholder="Enter Company Name"
+              formControlName="company_name"
+              type="text"
+            />
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="form-group">
+            <label class="form-control-label">Company Registration Date</label>
+            <input
+              class="form-control"
+              placeholder="Enter Sekolah"
+              formControlName="reg_date"
+              type="date"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label class="form-control-label">Company Status</label>
             <select
               class="form-control"
-              placeholder="Enter Type"
-              formControlName="status"
-              type="text"
+              placeholder="Enter Status"
+              formControlName="company_status"
             >
-              <!-- <option value="SB">Submitted</option>
-              <option value="IP">In Progress</option> -->
-              <option value="CS">Close</option>
+              <option value="CO">Company</option>
+              <option value="PA">Partnership</option>
+              <option value="IN">Individual</option>
+              <option value="SO">Society</option>
+              <option value="OT">Others</option>
             </select>
           </div>
+        </div>
+
+        <div class="col">
+          <div class="form-group">
+            <label class="form-control-label">Office Number</label>
+            <input
+              class="form-control"
+              placeholder="Enter  Number"
+              formControlName="office_number"
+              type="text"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label class="form-control-label">Fax</label>
+            <input
+              class="form-control"
+              placeholder="Enter Fax"
+              formControlName="fax"
+              type="text"
+            />
+          </div>
+        </div>
+        <div class="col">
+          <!-- <div class="form-group">
+              <label class="form-control-label">Supporting Document</label>
+              <input
+                class="form-control"
+                formControlName="document1"
+                type="file"
+              />
+            </div> -->
         </div>
       </div>
 
@@ -475,131 +677,13 @@
     </form>
   </div>
 
-  <div class="modal-footer">
+  <div class="modal-footer bg-secondary">
     <div class="text-center">
       <button
         class="btn btn-default"
         type="submit"
         (click)="editLicenseDetail()"
       >
-        Save
-      </button>
-
-      <button
-        class="btn btn-outline-danger ml-auto"
-        data-dismiss="modal"
-        type="button"
-        (click)="closeModal()"
-      >
-        Close
-      </button>
-    </div>
-  </div>
-</ng-template>
-
-<ng-template #addComplain>
-  <div class="modal-header bg-default">
-    <h6 class="modal-title text-white my-auto" id="modal-title-default">
-      Add New License
-    </h6>
-
-    <button
-      aria-label="Close"
-      class="close"
-      data-dismiss="modal"
-      type="button"
-      (click)="closeModal()"
-    >
-      <span aria-hidden="true" class="text-white my-auto"> × </span>
-    </button>
-  </div>
-
-  <div class="modal-body">
-    <form [formGroup]="addNewLicenseForm">
-      <div class="row">
-        <div class="col-md-6">
-          <div class="form-group">
-            <label class="form-control-label">Name</label>
-            <input
-              class="form-control"
-              placeholder="Enter Name"
-              formControlName="name"
-              type="text"
-            />
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="form-group">
-            <label class="form-control-label">License Category</label>
-            <select
-              class="form-control"
-              placeholder="Enter Type"
-              formControlName="License_category"
-              type="text"
-            >
-              <option value="VB">Verbal</option>
-              <option value="TX">Text</option>
-              <option value="NA">Not Available</option>
-            </select>
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-md-6">
-          <div class="form-group">
-            <label class="form-control-label">email</label>
-            <input
-              class="form-control"
-              placeholder="Enter Email"
-              formControlName="email"
-              type="text"
-            />
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="form-group">
-            <label class="form-control-label">Phone</label>
-            <input
-              class="form-control"
-              placeholder="Enter Phone"
-              formControlName="phone"
-              type="text"
-            />
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-md-6">
-          <div class="form-group">
-            <label class="form-control-label">License</label>
-            <input
-              class="form-control"
-              placeholder="Enter License"
-              formControlName="License"
-              type="text"
-            />
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="form-group">
-            <label class="form-control-label">Document</label>
-            <input
-              class="form-control"
-              placeholder="Enter Phone"
-              formControlName="phone"
-              type="file"
-            />
-          </div>
-        </div>
-      </div>
-    </form>
-  </div>
-
-  <div class="modal-footer">
-    <div class="text-center">
-      <button class="btn btn-default" type="submit" (click)="addNewLicense()">
         Save
       </button>
 

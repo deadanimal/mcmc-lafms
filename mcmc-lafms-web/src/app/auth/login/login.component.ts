@@ -59,33 +59,34 @@ export class LoginComponent implements OnInit {
     this.loadingBar.start();
     console.log(this.loginForm.value.username);
 
-    if (this.loginForm.value.username == "admin") {
-      this.navigatePage("dashboard-admin");
-    } else if (this.loginForm.value.username == "user") {
-      this.navigatePage("dashboard-user");
-    } else if (this.loginForm.value.username == "rad") {
-      this.navigatePage("dashboard-rad");
-    } else if (this.loginForm.value.username == "rmd") {
-      this.navigatePage("dashboard-rmd");
-    }
-
     this.successMessage();
     // this.navigatePage("dashboard-admin");
     console.log("page = " + this.loginForm.value);
-    // this.authService.obtainToken(this.loginForm.value).subscribe(
-    //   (res) => {
-    //     console.log("res = " + res);
-    //     this.loadingBar.complete();
+    this.authService.obtainToken(this.loginForm.value).subscribe(
+      (res) => {
+        console.log("res = " + [res]);
+        this.loadingBar.complete();
+        console.log("www", this.authService.userType);
 
-    //     // this.successMessage();
-    //   },
-    //   (err) => {
-    //     this.loadingBar.complete();
-    //     this.errorMessage();
-    //     // console.log("HTTP Error", err), this.errorMessage();
-    //   },
-    //   () => console.log("HTTP request completed.")
-    // );
+        if (this.authService.userType == "LD") {
+          this.navigatePage("dashboard-admin");
+        } else if (this.authService.userType == "US") {
+          this.navigatePage("dashboard-user");
+        } else if (this.authService.userType == "RA") {
+          this.navigatePage("dashboard-rad");
+        } else if (this.authService.userType == "RM") {
+          this.navigatePage("dashboard-rmd");
+        }
+
+        // this.successMessage();
+      },
+      (err) => {
+        this.loadingBar.complete();
+        this.errorMessage();
+        // console.log("HTTP Error", err), this.errorMessage();
+      },
+      () => console.log("HTTP request completed.")
+    );
   }
 
   navigatePage(path: String) {

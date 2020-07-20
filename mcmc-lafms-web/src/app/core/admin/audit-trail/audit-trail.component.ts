@@ -645,9 +645,9 @@ export class AuditTrailComponent implements OnInit, OnDestroy {
       },
     ];
 
-    createSeries("first", "Application");
-    createSeries("second", "Survey");
-    createSeries("third", "Complaint");
+    createSeries("first", "Approved");
+    createSeries("second", "Rejected");
+    createSeries("third", "Completed");
 
     function arrangeColumns() {
       let series = chart.series.getIndex(0);
@@ -704,19 +704,19 @@ export class AuditTrailComponent implements OnInit, OnDestroy {
 
     chart.data = [
       {
-        country: "MyCC Application",
+        country: "Approved",
         value: 260,
       },
       {
-        country: "MSC Application",
+        country: "Rejected",
         value: 230,
       },
       {
-        country: "Complaint",
+        country: "New",
         value: 200,
       },
       {
-        country: "Survey",
+        country: "Pending",
         value: 165,
       },
     ];

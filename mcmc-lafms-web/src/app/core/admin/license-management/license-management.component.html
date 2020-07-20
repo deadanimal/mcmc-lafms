@@ -212,55 +212,29 @@
 
             <ngx-datatable-column>
               <ng-template ngx-datatable-header-template>
-                <span>Email</span>
+                <span>Organization Category</span>
               </ng-template>
-              <ng-template let-row="row" ngx-datatable-cell-template
-                >{{ row.email }}
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <span *ngIf="row.company_status == 'CO'">Company</span>
+                <span *ngIf="row.company_status == 'PA'">Partnership</span>
+                <span *ngIf="row.company_status == 'IN'">Individual</span>
+                <span *ngIf="row.company_status == 'SO'">Society</span>
+                <span *ngIf="row.company_status == 'OT'">Others</span>
               </ng-template>
             </ngx-datatable-column>
 
             <ngx-datatable-column>
               <ng-template ngx-datatable-header-template>
-                <span>Complaint Category</span>
+                <span>Application Status</span>
               </ng-template>
               <ng-template let-row="row" ngx-datatable-cell-template>
-                <span *ngIf="row.complaint_category == 'VB'">Verbal</span>
-                <span *ngIf="row.complaint_category == 'TX'">Text</span>
-                <span *ngIf="row.complaint_category == 'NA'"
-                  >Not Available</span
+                <span *ngIf="row.application_status == 'RE'">Reviewed</span>
+                <span *ngIf="row.application_status == 'NA'"
+                  >New Application</span
                 >
-              </ng-template>
-            </ngx-datatable-column>
-
-            <!-- <ngx-datatable-column>
-              <ng-template ngx-datatable-header-template>
-                <span>Complaint To</span>
-              </ng-template>
-              <ng-template let-row="row" ngx-datatable-cell-template
-                >{{ row.complaint_to }}
-              </ng-template>
-            </ngx-datatable-column> -->
-
-            <ngx-datatable-column>
-              <ng-template ngx-datatable-header-template>
-                <span>Status</span>
-              </ng-template>
-              <ng-template let-row="row" ngx-datatable-cell-template>
-                <span
-                  class="badge badge-pill badge-info"
-                  *ngIf="row.status == 'SB'"
-                  >Submitted</span
-                >
-                <span
-                  class="badge badge-pill badge-warning"
-                  *ngIf="row.status == 'IP'"
-                  >In-Progress</span
-                >
-                <span
-                  class="badge badge-pill badge-success"
-                  *ngIf="row.status == 'CM'"
-                  >Completed</span
-                >
+                <span *ngIf="row.application_status == 'EV'">Evaluated</span>
+                <span *ngIf="row.application_status == 'AP'">Approved</span>
+                <span *ngIf="row.application_status == 'CO'">Completed</span>
               </ng-template>
             </ngx-datatable-column>
 
@@ -279,15 +253,20 @@
               </ng-template>
               <ng-template let-row="row" ngx-datatable-cell-template>
                 <a
-                  (click)="openModal(editComplain, row)"
+                  (click)="openModal(viewComplain, row)"
                   style="cursor: pointer;"
-                  ><i class="fas fa-file-alt fa-2x"></i
-                ></a>
-                <!-- <a
-                              (click)="navigatePage('/admin//utility/user-detail', row.id)"
-                              style="cursor: pointer;"
-                              ><i class="fas fa-eye"></i></a
-                            > -->
+                >
+                  <button class="btn btn-sm btn-warning">
+                    <i class="fas fa-eye"></i>
+                  </button> </a
+                >&nbsp;<a
+                  (click)="openModalsm(editComplain, row)"
+                  style="cursor: pointer;"
+                >
+                  <button class="btn btn-sm btn-info">
+                    <i class="fas fa-edit"></i>
+                  </button>
+                </a>
               </ng-template>
             </ngx-datatable-column>
           </ngx-datatable>
@@ -299,7 +278,7 @@
 <ng-template #editComplain>
   <div class="modal-header bg-default">
     <h6 class="modal-title text-white my-auto" id="modal-title-default">
-      Edit Complaint
+      Update License Application
     </h6>
 
     <button
@@ -315,49 +294,72 @@
 
   <div class="modal-body">
     <form [formGroup]="editLicenseForm">
-      <div class="form-group">
-        <label class="form-control-label">email</label>
-        <input
-          class="form-control"
-          placeholder="Enter Email"
-          formControlName="email"
-          type="text"
-        />
+      {{ editLicenseForm.value.count_no }}
+
+      <div *ngIf="editLicenseForm.value.count_no == '4'">
+        <div class="form-group">
+          <label class="form-control-label">Status</label>
+          <select
+            class="form-control"
+            placeholder="Enter Ticket Name"
+            formControlName="application_status"
+          >
+            <option value="CO">Completed</option>
+            <option value="RJ">Rejected</option>
+          </select>
+        </div>
+      </div>
+      <div *ngIf="editLicenseForm.value.count_no == '3'">
+        <div class="form-group">
+          <label class="form-control-label">Status</label>
+          <select
+            class="form-control"
+            placeholder="Enter Ticket Name"
+            formControlName="application_status"
+          >
+            <option value="AP">Approved</option>
+            <option value="RJ">Rejected</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-control-label">Note</label>
+          <textarea
+            class="form-control"
+            placeholder="Enter Ticket Name"
+            formControlName="note"
+          >
+          </textarea>
+        </div>
       </div>
 
-      <!-- <div class="col-md-12">
-          <div class="form-group">
-            <label class="form-control-label">Complaint To</label>
-            <select
-              class="form-control"
-              placeholder="Enter Module"
-              formControlName="complaint_to"
-              type="text"
-            >
-              <option value="">Please Choose</option>
-              <option *ngFor="let item of listUser" [value]="item.id">{{
-                item.username
-              }}</option>
-            </select>
-          </div>
+      <div *ngIf="editLicenseForm.value.count_no == '2'">
+        <div class="form-group">
+          <label class="form-control-label">Status</label>
+          <select
+            class="form-control"
+            placeholder="Enter Ticket Name"
+            formControlName="application_status"
+          >
+            <option value="EV">Evaluated</option>
+            <option value="RJ">Rejected</option>
+          </select>
         </div>
+      </div>
 
-        <div class="col-md-12">
-          <div class="form-group">
-            <label class="form-control-label">Status</label>
-            <select
-              class="form-control"
-              placeholder="Enter Ticket Name"
-              formControlName="status"
-              type="text"
-            >
-              <option value="SB">Submitted</option>
-              <option value="IP">In-Progress</option>
-              <option value="CM">Completed</option>
-            </select>
-          </div>
-        </div> -->
-
+      <div *ngIf="editLicenseForm.value.count_no == '1'">
+        <div class="form-group">
+          <label class="form-control-label">Status </label>
+          <select
+            class="form-control"
+            placeholder="Enter Ticket Name"
+            formControlName="application_status"
+          >
+            <option value="NA">New Application</option>
+            <option value="RJ">Rejected</option>
+            <option value="RE">Reviewed</option>
+          </select>
+        </div>
+      </div>
       <input name="id" formControlName="id" type="hidden" />
     </form>
   </div>
@@ -384,10 +386,10 @@
   </div>
 </ng-template>
 
-<ng-template #addComplain>
+<ng-template #viewComplain>
   <div class="modal-header bg-default">
     <h6 class="modal-title text-white my-auto" id="modal-title-default">
-      Add New Complaint
+      View License Application
     </h6>
 
     <button
@@ -401,57 +403,71 @@
     </button>
   </div>
 
-  <div class="modal-body">
-    <form [formGroup]="addNewComplaintForm">
+  <div class="modal-body bg-secondary">
+    <form [formGroup]="editLicenseForm">
       <div class="row">
-        <div class="col-md-6">
+        <div class="col">
           <div class="form-group">
-            <label class="form-control-label">Name</label>
-            <input
-              class="form-control"
-              placeholder="Enter Name"
-              formControlName="name"
-              type="text"
-            />
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="form-group">
-            <label class="form-control-label">Complaint Category</label>
+            <label class="form-control-label">License Type</label>
             <select
               class="form-control"
               placeholder="Enter Type"
-              formControlName="complaint_category"
-              type="text"
+              disabled
+              formControlName="licence_type"
             >
-              <option value="VB">Verbal</option>
-              <option value="TX">Text</option>
-              <option value="NA">Not Available</option>
+              <option value="IL">Individual License</option>
+              <option value="CL">Class License</option>
+            </select>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label class="form-control-label">License Details</label>
+            <select
+              class="form-control"
+              placeholder="Enter Details"
+              formControlName="licence_details_type"
+              disabled
+            >
+              <option value="NE">New</option>
+              <option value="RE">Renewal</option>
+              <option value="VS">Variation of Special licence condition</option>
+              <option value="TR">Transfer</option>
+              <option value="SU">Surrender</option>
+              <option value="CO">Change of particulars</option>
+              <option value="RO">Replacement of licence</option>
+              <option value="CL">Copy of Licence Request</option>
+              <option value="RR">Re-Registration</option>
+              <option value="CR">Copy of registration notice request'</option>
             </select>
           </div>
         </div>
       </div>
-
       <div class="row">
         <div class="col-md-6">
           <div class="form-group">
-            <label class="form-control-label">email</label>
+            <label class="form-control-label">Nama</label>
             <input
               class="form-control"
-              placeholder="Enter Email"
-              formControlName="email"
+              placeholder="Enter Name"
+              formControlName="name"
+              name="name"
               type="text"
+              disabled
             />
           </div>
         </div>
+
         <div class="col-md-6">
           <div class="form-group">
-            <label class="form-control-label">Phone</label>
+            <label class="form-control-label">NRIC</label>
             <input
               class="form-control"
-              placeholder="Enter Phone"
-              formControlName="phone"
+              placeholder="Enter NRIC"
+              formControlName="nric"
+              name="nric"
               type="text"
+              disabled
             />
           </div>
         </div>
@@ -460,23 +476,114 @@
       <div class="row">
         <div class="col-md-6">
           <div class="form-group">
-            <label class="form-control-label">Complaint</label>
+            <label class="form-control-label">Email</label>
             <input
               class="form-control"
-              placeholder="Enter Complaint"
-              formControlName="complaint"
+              placeholder="Enter Email"
+              formControlName="email"
+              name="email"
               type="text"
+              disabled
             />
           </div>
         </div>
+
         <div class="col-md-6">
           <div class="form-group">
-            <label class="form-control-label">Document</label>
+            <label class="form-control-label">Mobile Number</label>
             <input
               class="form-control"
-              placeholder="Enter Phone"
-              formControlName="phone"
-              type="file"
+              placeholder="Enter Mobile Number"
+              formControlName="mobile_number"
+              name="mobile_number"
+              type="text"
+              disabled
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label class="form-control-label">Company Name</label>
+            <input
+              class="form-control"
+              placeholder="Enter Company Name"
+              formControlName="company_name"
+              type="text"
+              disabled
+            />
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="form-group">
+            <label class="form-control-label">Company Registration Date</label>
+            <input
+              class="form-control"
+              placeholder="Enter Sekolah"
+              formControlName="reg_date"
+              type="date"
+              disabled
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label class="form-control-label">Company Status</label>
+            <select
+              class="form-control"
+              placeholder="Enter Status"
+              formControlName="company_status"
+              disabled
+            >
+              <option value="CO" checked>Company</option>
+              <option value="PA">Partnership</option>
+              <option value="IN">Individual</option>
+              <option value="SO">Society</option>
+              <option value="OT">Others</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="form-group">
+            <label class="form-control-label">Office Number</label>
+            <input
+              class="form-control"
+              placeholder="Enter  Number"
+              formControlName="office_number"
+              type="text"
+              disabled
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label class="form-control-label">Fax</label>
+            <input
+              class="form-control"
+              placeholder="Enter Fax"
+              formControlName="fax"
+              type="text"
+              disabled
+            />
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label class="form-control-label">General Description</label>
+            <input
+              class="form-control"
+              placeholder="Enter Mobile Number"
+              formControlName="general_description"
+              type="text"
+              disabled
             />
           </div>
         </div>
@@ -484,12 +591,8 @@
     </form>
   </div>
 
-  <div class="modal-footer">
+  <div class="modal-footer bg-secondary">
     <div class="text-center">
-      <button class="btn btn-default" type="submit" (click)="addNewComplaint()">
-        Save
-      </button>
-
       <button
         class="btn btn-outline-danger ml-auto"
         data-dismiss="modal"

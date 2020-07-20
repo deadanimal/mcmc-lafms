@@ -8,7 +8,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 
         token['username'] = user.username
         token['email'] = user.email
-        # token['user_type'] = user.user_type
+        token['user_type'] = user.user_type
 
         return token
 
